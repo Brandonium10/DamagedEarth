@@ -6,7 +6,8 @@ manifest.mf
 
 # Intellij excludes
 /.idea/
-.iml
+/DamagedEarth.iml
+/out/
 
 # Eclipse excludes
 .project
