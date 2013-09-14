@@ -1,7 +1,23 @@
-*.class
+# Netbeans excludes
+/nbproject/
+/dist/
+/build/
+manifest.mf
 
-# Package Files #
-*.jar
-*.war
-*.ear
-DamagedEarth.iml
+# Intellij excludes
+/.idea/
+.iml
+
+# Eclipse excludes
+.project
+.classpath
+/bin/
+/.settings/
+
+# OS generated files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
