@@ -5,7 +5,7 @@ import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
-import com.damagedearth.Gui.Components.GuiNPCDialogue;
+import com.damagedearth.Gui.Components.GuiNPCQuestDialogue;
 
 import java.awt.*;
 
@@ -49,7 +49,7 @@ public class CrystalForest extends BasicWorld
         Declare the NPC Gui's
          */
         this.guiDumbottom = new GuiNPC(damagedEarth, "Dumbbottom", null);
-        this.guiDumbottom.getSelectableList().add(new GuiNPCDialogue("Test1 Name", "Test1 Desc", false, guiDumbottom));
+        this.guiDumbottom.getSelectableList().add(new GuiNPCQuestDialogue("Test1 Name", "Test1 Desc", false, guiDumbottom));
 
         /*
         Declare the entities

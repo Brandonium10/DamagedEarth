@@ -148,6 +148,7 @@ public class ControlledEntityPlayer
     public void finishQuest(BasicQuest quest)
     {
         this.ownedQuests.remove(quest);
+        System.out.println("[Player] Player has turned in quest (" + quest.getQuestName() + ") to NPC (" + quest.getQuestGiver().getEntityName() + ")");
     }
 
     /*

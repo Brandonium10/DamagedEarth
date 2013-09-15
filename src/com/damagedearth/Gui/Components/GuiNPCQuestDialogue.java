@@ -5,10 +5,10 @@ import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class GuiNPCDialogue
+public class GuiNPCQuestDialogue
 {
     /*
-    TODO: Add support for accepting quests
+    TODO: Add support for entering in "before accept", "in complete", and "complete" dialogue for the dialogue box.
      */
     private String title;
     private String definition;
@@ -17,19 +17,23 @@ public class GuiNPCDialogue
     private int width;
     private int height;
     private boolean isSelected;
+    private boolean isEnabled;
     GuiScreen parentScreen;
 
     protected GuiButton done;
     protected GuiButton cancel;
 
     protected BasicQuest quest;
+    protected boolean isQuestComplete;
 
-    public GuiNPCDialogue(String title, String definition, boolean isSelected, final GuiScreen parentScreen)
+    public GuiNPCQuestDialogue(String title, String definition, boolean isSelected, final GuiScreen parentScreen)
     {
         this.title = title;
         this.definition = definition;
         this.isSelected = isSelected;
         this.parentScreen = parentScreen;
+        this.isEnabled = true;
+        this.isQuestComplete = false;
 
         done = new GuiButton("Okay", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
                 DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
@@ -38,8 +42,20 @@ public class GuiNPCDialogue
             @Override
             public void run()
             {
+                /*
+                Changes the reaction of the "Okay" button based on whether or not the quest is complete
+                 */
+                if (isQuestComplete)
+                {
+                    parentScreen.damagedEarth.currentWorld.thePlayer.finishQuest(quest);
+                    setEnabled(false);
+                }
+                else
+                {
+                    parentScreen.damagedEarth.currentWorld.thePlayer.acceptQuest(quest);
+                }
+                unSelect();
                 parentScreen.damagedEarth.switchScreen(null);
-                parentScreen.damagedEarth.currentWorld.thePlayer.acceptQuest(quest);
             }
         }, false, 0, 255, 0);
         cancel = new GuiButton("Cancel", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
@@ -53,6 +69,7 @@ public class GuiNPCDialogue
             }
         }, false, 255, 0, 0);
 
+        //Add these two buttons to the parent screen
         this.parentScreen.buttonList.add(done);
         this.parentScreen.buttonList.add(cancel);
     }
@@ -74,6 +91,9 @@ public class GuiNPCDialogue
      */
     private void whileSelected()
     {
+        /*
+        Renders button art and the dialogue box
+         */
         glPushMatrix();
         glPushAttrib(GL_CURRENT_BIT);
         glColor4f(0, 0, 0, 1);
@@ -92,13 +112,16 @@ public class GuiNPCDialogue
          */
         if (this.parentScreen instanceof GuiNPC)
         {
-            for (GuiNPCDialogue selectable : ((GuiNPC) this.parentScreen).selectableList)
+            for (GuiNPCQuestDialogue selectable : ((GuiNPC) this.parentScreen).selectableList)
             {
                 if (selectable != this)
                 {
                     selectable.unSelect();
                 }
             }
+            /*
+            Enables the buttons when you select()
+             */
             this.done.setEnabled(true);
             this.cancel.setEnabled(true);
         }
@@ -106,6 +129,9 @@ public class GuiNPCDialogue
 
     private void onUnSelect()
     {
+        /*
+        Disables the buttons when you unSelect()
+         */
         this.done.setEnabled(false);
         this.cancel.setEnabled(false);
     }
@@ -132,18 +158,23 @@ public class GuiNPCDialogue
      */
     public void update()
     {
-        //Updates the buttons positions with the scrolling cords
-        done.setX(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2);
-        done.setY(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
-        done.setWidth(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4 - done.getX());
-        done.setHeight(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - done.getY());
-        cancel.setX(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4);
-        cancel.setY(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
-        cancel.setWidth(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2 - cancel.getX());
-        cancel.setHeight(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - cancel.getY());
+        if (this.isEnabled())
+        {
+            //Updates the buttons positions with the scrolling cords
+            done.setX(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2);
+            done.setY(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
+            done.setWidth(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4 - done.getX());
+            done.setHeight(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - done.getY());
+            cancel.setX(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4);
+            cancel.setY(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
+            cancel.setWidth(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2 - cancel.getX());
+            cancel.setHeight(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - cancel.getY());
 
-        this.render();
-        if (this.isSelected) this.whileSelected();
+            this.render();
+            if (this.isSelected) this.whileSelected();
+
+            if (this.quest.isComplete()) this.isQuestComplete = true;
+        }
     }
 
     public String getTitle()
@@ -219,5 +250,25 @@ public class GuiNPCDialogue
     public boolean isSelected()
     {
         return isSelected;
+    }
+
+    public boolean isEnabled()
+    {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled)
+    {
+        isEnabled = enabled;
+    }
+
+    public boolean isQuestComplete()
+    {
+        return isQuestComplete;
+    }
+
+    public void setQuestComplete(boolean questComplete)
+    {
+        isQuestComplete = questComplete;
     }
 }
