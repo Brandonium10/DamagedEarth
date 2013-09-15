@@ -45,23 +45,23 @@ public class CrystalForest extends BasicWorld
     @Override
     public void loadWorld()
     {
-        //TODO: Fix circular declaration so quests, NPC's, and dialogue gui's work.
-        /*
-        Declare the NPC's quests
-         */
-        this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom);
-
         /*
         Declare the NPC Gui's
          */
         this.guiDumbottom = new GuiNPC(damagedEarth, "Dumbbottom", null);
-        this.guiDumbottom.getSelectableList().add(new GuiNPCDialogue("Test1 Name", "Test1 Desc", this.dumbottomTraining1, false, guiDumbottom));
+        this.guiDumbottom.getSelectableList().add(new GuiNPCDialogue("Test1 Name", "Test1 Desc", false, guiDumbottom));
 
         /*
         Declare the entities
          */
         this.npcDumbbottom = new EntityNPC("Dumbottom", thePlayer, guiDumbottom, 155, 100, 50, 50, damagedEarth, null, null, null, null);
         this.enemyTreegiant1 = new EntityEnemy("Treegiant", thePlayer, 50, 500, 100, 60, 50, damagedEarth, new Point(700, 100), new Point(500, 100), null, null, 1.5, 3);
+
+        /*
+        Declare the NPC's quests and sets the quest declared to the correct selectable
+         */
+        this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom);
+        this.guiDumbottom.getSelectableList().get(0).setQuest(this.dumbottomTraining1);
 
         /*
         Add the entities to the entityList so they can be updated properly

@@ -24,40 +24,6 @@ public class GuiNPCDialogue
 
     protected BasicQuest quest;
 
-    public GuiNPCDialogue(String title, String definition, final BasicQuest quest, boolean isSelected, final GuiScreen parentScreen)
-    {
-        this.title = title;
-        this.definition = definition;
-        this.quest = quest;
-        this.isSelected = isSelected;
-        this.parentScreen = parentScreen;
-
-        done = new GuiButton("Okay", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
-                DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
-                DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4, DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                parentScreen.damagedEarth.switchScreen(null);
-                parentScreen.damagedEarth.currentWorld.thePlayer.acceptQuest(quest);
-            }
-        }, false, 0, 255, 0);
-        cancel = new GuiButton("Cancel", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
-                DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
-                DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2, DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                unSelect();
-            }
-        }, false, 255, 0, 0);
-
-        this.parentScreen.buttonList.add(done);
-        this.parentScreen.buttonList.add(cancel);
-    }
-
     public GuiNPCDialogue(String title, String definition, boolean isSelected, final GuiScreen parentScreen)
     {
         this.title = title;
@@ -73,6 +39,7 @@ public class GuiNPCDialogue
             public void run()
             {
                 parentScreen.damagedEarth.switchScreen(null);
+                parentScreen.damagedEarth.currentWorld.thePlayer.acceptQuest(quest);
             }
         }, false, 0, 255, 0);
         cancel = new GuiButton("Cancel", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
