@@ -55,18 +55,22 @@ public class CrystalForest extends BasicWorld
         Declare the entities
          */
         this.npcDumbbottom = new EntityNPC("Dumbottom", thePlayer, guiDumbottom, 155, 100, 50, 50, damagedEarth, null, null, null, null);
+
         this.enemyTreegiant1 = new EntityEnemy("Treegiant", thePlayer, 50, 500, 100, 60, 50, damagedEarth, new Point(700, 100), new Point(500, 100), null, null, 1.5, 3);
+        this.enemyTreegiant2 = new EntityEnemy("Treegiant", thePlayer, 50, 200, 700, 60, 50, damagedEarth, new Point(500, 900), new Point(200, 700), null, null, 1.5, 3);
 
         /*
         Declare the NPC's quests and sets the quest declared to the correct selectable
          */
-        this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom);
+        this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom, "Treegiant", 2);
         this.guiDumbottom.getSelectableList().get(0).setQuest(this.dumbottomTraining1);
 
         /*
         Add the entities to the entityList so they can be updated properly
          */
         this.entityList.add(npcDumbbottom);
+
         this.entityList.add(enemyTreegiant1);
+        this.entityList.add(enemyTreegiant2);
     }
 }

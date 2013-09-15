@@ -15,10 +15,12 @@ public class SlayingQuest extends BasicQuest
         this.questType = EnumQuestType.SLAYING;
     }
 
-    public SlayingQuest(ControlledEntityPlayer thePlayer, String questName, EntityNPC npcGiver)
+    public SlayingQuest(ControlledEntityPlayer thePlayer, String questName, EntityNPC npcGiver, String enemyToKill, int amount)
     {
         super(thePlayer, questName, npcGiver);
         this.questType = EnumQuestType.SLAYING;
+        this.enemyToKill = enemyToKill;
+        this.amount = amount;
     }
 
     public void setGoal(String enemyName, int amount)

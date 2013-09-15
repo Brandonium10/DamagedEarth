@@ -8,7 +8,7 @@ Helping Out
 =
 
 We are looking for programmers, artists, and musicians. Programmers must know how to OOP with Java and it is highly
-reccomended that he/she uses an IDE. Artists must be good with making 8-Bit images and it is reccomended that he/she
+recommended that he/she uses an IDE. Artists must be good with making 8-Bit images and it is recommended that he/she
 uses a program such as Gimp or Photoshop. Musicians need to have skill and fit the "dark evil" theme into their toons.
 No matter what job you have, you must have a good imagination and understand what the average player would want.
 
@@ -17,4 +17,10 @@ Forking and Requests
 
 1. Make sure your changes work. Compile and test thoroughly before submitting a pull request.
 2. Make sure your code is written in the Allman style.
-3. Submit only if the change is signifgant
+3. Submit only if the change is significant
+
+Contacting Lead Developers
+=
+
+Skype: virtualviper1, minecraftlover687
+Email: andrewmacu@me.com
