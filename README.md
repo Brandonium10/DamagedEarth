@@ -22,5 +22,5 @@ Forking and Requests
 Contacting Lead Developers
 =
 
-Skype: virtualviper1, minecraftlover687
-Email: andrewmacu@me.com
+1. Skype: virtualviper1, minecraftlover687
+2. Email: andrewmacu@me.com
