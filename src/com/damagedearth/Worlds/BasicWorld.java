@@ -1,8 +1,8 @@
 package com.damagedearth.Worlds;
 
 import com.damagedearth.DamagedEarth;
-import com.damagedearth.Entities.ControlledEntityPlayer;
 import com.damagedearth.Entities.Components.Entity;
+import com.damagedearth.Entities.ControlledEntityPlayer;
 import com.damagedearth.Entities.EnumPlayerClass;
 
 import java.util.ArrayList;

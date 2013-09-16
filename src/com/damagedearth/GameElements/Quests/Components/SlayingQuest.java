@@ -1,8 +1,8 @@
 package com.damagedearth.GameElements.Quests.Components;
 
+import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.Entities.ControlledEntityPlayer;
-import com.damagedearth.Entities.Components.EntityEnemy;
 
 public class SlayingQuest extends BasicQuest
 {

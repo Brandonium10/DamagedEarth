@@ -1,9 +1,6 @@
 package com.damagedearth.Gui.Components;
 
-import com.damagedearth.Utilities.MouseHelper;
-
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
 
 public class GuiButton
 {

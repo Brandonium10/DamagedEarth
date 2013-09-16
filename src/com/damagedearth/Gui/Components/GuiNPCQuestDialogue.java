@@ -3,6 +3,9 @@ package com.damagedearth.Gui.Components;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class GuiNPCQuestDialogue
@@ -18,6 +21,9 @@ public class GuiNPCQuestDialogue
     private int height;
     private boolean isSelected;
     private boolean isEnabled;
+    private List<String> dialogueBeforeAccept = new ArrayList<String>();
+    private List<String> dialogueIncomplete = new ArrayList<String>();
+    private List<String> dialogueComplete = new ArrayList<String>();
     GuiScreen parentScreen;
 
     protected GuiButton done;
@@ -270,5 +276,35 @@ public class GuiNPCQuestDialogue
     public void setQuestComplete(boolean questComplete)
     {
         isQuestComplete = questComplete;
+    }
+
+    public List<String> getDialogueBeforeAccept()
+    {
+        return dialogueBeforeAccept;
+    }
+
+    public void setDialogueBeforeAccept(List<String> dialogueBeforeAccept)
+    {
+        this.dialogueBeforeAccept = dialogueBeforeAccept;
+    }
+
+    public List<String> getDialogueIncomplete()
+    {
+        return dialogueIncomplete;
+    }
+
+    public void setDialogueIncomplete(List<String> dialogueIncomplete)
+    {
+        this.dialogueIncomplete = dialogueIncomplete;
+    }
+
+    public List<String> getDialogueComplete()
+    {
+        return dialogueComplete;
+    }
+
+    public void setDialogueComplete(List<String> dialogueComplete)
+    {
+        this.dialogueComplete = dialogueComplete;
     }
 }

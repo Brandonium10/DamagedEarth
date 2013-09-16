@@ -10,8 +10,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
-import static org.lwjgl.opengl.GL11.glDeleteTextures;
-
 public class FontRenderer
 {
 

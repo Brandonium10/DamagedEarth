@@ -1,13 +1,12 @@
 package com.damagedearth.Utilities;
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL12;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.ByteBuffer;
-
-import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL12;
 
 import static org.lwjgl.opengl.GL11.*;
 

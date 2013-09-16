@@ -2,7 +2,6 @@ package com.damagedearth.Entities.Components;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.ControlledEntityPlayer;
-import com.damagedearth.Utilities.MathHelper;
 
 import java.awt.*;
 

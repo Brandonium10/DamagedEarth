@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glRectd;
 
 public class GuiNPC extends GuiScreen
 {

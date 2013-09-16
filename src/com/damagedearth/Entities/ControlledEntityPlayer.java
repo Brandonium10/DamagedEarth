@@ -2,11 +2,10 @@ package com.damagedearth.Entities;
 
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
-import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
-import com.damagedearth.Utilities.MouseHelper;
-import com.damagedearth.Worlds.BasicWorld;
 import com.damagedearth.Utilities.MathHelper;
+import com.damagedearth.Utilities.MouseHelper;
 import com.damagedearth.Utilities.TextureLoader;
+import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.image.BufferedImage;
