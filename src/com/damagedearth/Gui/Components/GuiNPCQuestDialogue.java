@@ -32,6 +32,13 @@ public class GuiNPCQuestDialogue
     protected BasicQuest quest;
     protected boolean isQuestComplete;
 
+    /**
+     *
+     * @param title The visible title of the selectable
+     * @param definition The visible description of the selectable
+     * @param isSelected Is the button selected?
+     * @param parentScreen The parent NPC screen
+     */
     public GuiNPCQuestDialogue(String title, String definition, boolean isSelected, final GuiScreen parentScreen)
     {
         this.title = title;

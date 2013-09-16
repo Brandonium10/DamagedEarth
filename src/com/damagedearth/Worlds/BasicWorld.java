@@ -28,6 +28,9 @@ public abstract class BasicWorld
 
     public abstract void loadWorld();
 
+    /**
+     * Updates all entities and objects in the world
+     */
     public void updateAndRender()
     {
         this.gameLoop();
@@ -45,10 +48,10 @@ public abstract class BasicWorld
         this.scrollWorld(this.thePlayer.getX(), this.thePlayer.getY());
     }
 
-    /*
-    The viewing area has specific coordinates(top left). If the player gets near the end of the viewing area,
-    it will scroll and increase the coordinates of the viewing area to the direction the player is going. Not
-    sure how this will react with the teleport() method, but it works perfectly with the move()
+    /**
+     * The viewing area has specific coordinates(top left). If the player gets near the end of the viewing area,
+     * it will scroll and increase the coordinates of the viewing area to the direction the player is going. Not
+     * sure how this will react with the teleport() method, but it works perfectly with the move()
      */
     public void scrollWorld(double playerX, double playerY)
     {

@@ -13,6 +13,12 @@ public class GuiNPC extends GuiScreen
 {
     protected List<GuiNPCQuestDialogue> selectableList = new ArrayList<GuiNPCQuestDialogue>();
 
+    /**
+     *
+     * @param damagedEarth An instance of Damaged Earth
+     * @param displayName The visible name of the GUI
+     * @param parentScreen The parent screen of the gui
+     */
     public GuiNPC(DamagedEarth damagedEarth, String displayName, GuiScreen parentScreen)
     {
         super(damagedEarth, displayName, parentScreen);

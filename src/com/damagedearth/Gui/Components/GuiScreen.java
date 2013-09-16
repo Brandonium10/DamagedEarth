@@ -19,6 +19,12 @@ public class GuiScreen
     public String displayName;
     FontRenderer fontRenderer;
 
+    /**
+     *
+     * @param damagedEarth An instance of Damaged Earth
+     * @param displayName The visible name of the GUI
+     * @param parentScreen The parent screen of the gui
+     */
     public GuiScreen(DamagedEarth damagedEarth, String displayName, GuiScreen parentScreen)
     {
         this.damagedEarth = damagedEarth;

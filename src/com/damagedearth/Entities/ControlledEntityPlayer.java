@@ -17,8 +17,25 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class ControlledEntityPlayer
 {
-    /*
-    x and y coordinates of the player are based on the BOTTOM left side
+    /**
+     * @variable x   The x coordinates of the player
+     * @variable y   The y coordinates of the player
+     * @variable width   The width of the player
+     * @variable height   The height of the plater
+     * @variable health   The current health of the player
+     * @variable level   The current level of the player
+     * @variable xp   The XP of the player currently has (resets with every new level)
+     * @variable isDead   Is the player dead?
+     * @variable targetedEntity   The current entity the player has targeted
+     * @variable playerClass   The gameplay class the player has chosen
+     * @variable currentWorld   The current world which the player is at
+     * @variable ownedQuests   All the quests the player currently has
+     * @variable averageDamage   The average damage the player deals to enemies
+     * @variable damageModifier   The greatest possible random damage a player can deal to enemies
+     * @variable keyStates   Used for keyboard
+     * @variable speed   The speed of the player
+     * @variable currentPlayerImage   The image the player currently has rendered
+     * @variable lastDirection   The last direction the player faced
      */
     private double x, y, width, height;
     private int health;
@@ -44,6 +61,15 @@ public class ControlledEntityPlayer
      */
     private int lastDirection;
 
+    /**
+     *
+     * @param defaultX The x coordinates of where the player will spawn
+     * @param defaultY The y coordinates of where the player will spawn
+     * @param width The width of the player
+     * @param height The height of the player
+     * @param currentWorld The world the player currently is
+     * @param playerClass The gameplay class the player chose
+     */
     public ControlledEntityPlayer(double defaultX, double defaultY, double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
     {
         this.x = defaultX;
@@ -62,6 +88,9 @@ public class ControlledEntityPlayer
         targetedEntity = null;
     }
 
+    /*
+     * Updates the player (handles input, renders player, and checks if (s)he's dead)
+     */
     public void onLivingUpdate()
     {
         if (!isDead)
@@ -85,8 +114,8 @@ public class ControlledEntityPlayer
         return Keyboard.isKeyDown(i) != keyStates[i] && (keyStates[i] = !keyStates[i]);
     }
 
-    /*
-    This renders the player according to his x and y coordinates
+    /**
+     * This renders the player according to his x and y coordinates
      */
     private void renderPlayer()
     {
@@ -120,6 +149,11 @@ public class ControlledEntityPlayer
         glPopMatrix();
     }
 
+    /**
+     *
+     * @param x The x offset the player should move by
+     * @param y The y offset the player should move by
+     */
     public void move(double x, double y)
     {
         this.x += x;
@@ -132,6 +166,10 @@ public class ControlledEntityPlayer
         this.y = y;
     }
 
+    /**
+     *
+     * @param quest The quest the player will accept
+     */
     public void acceptQuest(BasicQuest quest)
     {
         this.ownedQuests.add(quest);
@@ -237,6 +275,11 @@ public class ControlledEntityPlayer
         }
     }
 
+    /**
+     * Checks if the player less then 70 pixels away from a entity
+     *
+     * @return Returns true if the player is less than 70 pixels away
+     */
     public boolean nearEntity(Entity entity)
     {
         return Math.sqrt(MathHelper.getDistanceSq(this.x, this.y, entity.getX(), entity.getY())) <= 70;
