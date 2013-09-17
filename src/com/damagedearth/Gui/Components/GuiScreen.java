@@ -1,7 +1,7 @@
 package com.damagedearth.Gui.Components;
 
 import com.damagedearth.DamagedEarth;
-import com.damagedearth.Utilities.FontRenderer;
+import com.damagedearth.Utilities.Components.FontRenderer;
 import com.damagedearth.Utilities.MouseHelper;
 import org.lwjgl.input.Keyboard;
 

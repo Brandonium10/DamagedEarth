@@ -62,18 +62,15 @@ public class ControlledEntityPlayer
     private int lastDirection;
 
     /**
-     *
-     * @param defaultX The x coordinates of where the player will spawn
-     * @param defaultY The y coordinates of where the player will spawn
-     * @param width The width of the player
-     * @param height The height of the player
+     * @param defaultX     The x coordinates of where the player will spawn
+     * @param defaultY     The y coordinates of where the player will spawn
+     * @param width        The width of the player
+     * @param height       The height of the player
      * @param currentWorld The world the player currently is
-     * @param playerClass The gameplay class the player chose
+     * @param playerClass  The gameplay class the player chose
      */
     public ControlledEntityPlayer(double defaultX, double defaultY, double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
     {
-        this.x = defaultX;
-        this.y = defaultY;
         this.width = width;
         this.height = height;
         this.speed = 1.5F;
@@ -86,6 +83,14 @@ public class ControlledEntityPlayer
         this.damageModifier = 6;
         this.isDead = false;
         targetedEntity = null;
+
+        //If the player data file loads with any errors, the player will spawn in the world's default location. Otherwise, he will be spawned in the last saved place.
+        if (!this.currentWorld.damagedEarth.playerManager.loadLocation(this))
+        {
+            this.x = defaultX;
+            this.y = defaultY;
+            System.out.println("[Player] Error loading the player data file: loaded default spawn instead");
+        }
     }
 
     /*
@@ -150,7 +155,6 @@ public class ControlledEntityPlayer
     }
 
     /**
-     *
      * @param x The x offset the player should move by
      * @param y The y offset the player should move by
      */
@@ -167,7 +171,6 @@ public class ControlledEntityPlayer
     }
 
     /**
-     *
      * @param quest The quest the player will accept
      */
     public void acceptQuest(BasicQuest quest)
@@ -264,6 +267,12 @@ public class ControlledEntityPlayer
         if (this.checkKey(Keyboard.KEY_1))
         {
             this.attackEnemy();
+        }
+        if (this.checkKey(Keyboard.KEY_S))
+        {
+            System.out.println("[Player] Saving the players location...");
+            this.currentWorld.damagedEarth.playerManager.updateLocation(this);
+            System.out.println("[Player] Saved the players location.");
         }
     }
 

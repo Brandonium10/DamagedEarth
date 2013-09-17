@@ -14,14 +14,14 @@ public abstract class BasicWorld
     public ControlledEntityPlayer thePlayer;
     protected List<Entity> entityList = new ArrayList<Entity>();
 
-    DamagedEarth damagedEarth;
+    public DamagedEarth damagedEarth;
 
     public BasicWorld(int spawnX, int spawnY, DamagedEarth damagedEarth)
     {
         this.spawnX = spawnX;
         this.spawnY = spawnY;
-        thePlayer = new ControlledEntityPlayer(this.spawnX, this.spawnY, 40, 45, this, EnumPlayerClass.SCIENTIST);
         this.damagedEarth = damagedEarth;
+        thePlayer = new ControlledEntityPlayer(this.spawnX, this.spawnY, 40, 45, this, EnumPlayerClass.SCIENTIST);
     }
 
     public abstract void gameLoop();

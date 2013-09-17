@@ -10,8 +10,8 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GuiNPCQuestDialogue
 {
-    /*
-    TODO: Add support for entering in "before accept", "in complete", and "complete" dialogue for the dialogue box.
+    /**
+     * TODO: Add support for entering in "before accept", "in complete", and "complete" dialogue for the dialogue box.
      */
     private String title;
     private String definition;

@@ -1,5 +1,6 @@
-package com.damagedearth.Utilities;
+package com.damagedearth.Utilities.Components;
 
+import com.damagedearth.Utilities.TextureLoader;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
