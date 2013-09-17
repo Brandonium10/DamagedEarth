@@ -17,7 +17,7 @@ public class PlayerFileManager
 
     public PlayerFileManager(String configName) {
         this.configName = configName;
-        this.fileConfiguration = new FileConfiguration("/Users/ayates/IdeaProjects/DEProject/" + this.configName + ".txt");
+        this.fileConfiguration = new FileConfiguration(this.configName + ".txt");
     }
 
     /**
