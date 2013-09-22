@@ -1,6 +1,8 @@
 package com.damagedearth.Gui.Components;
 
 import com.damagedearth.DamagedEarth;
+import com.damagedearth.Entities.Components.EntityNPC;
+import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.Utilities.MouseHelper;
 import org.lwjgl.input.Keyboard;
 
@@ -11,18 +13,26 @@ import static org.lwjgl.opengl.GL11.glRectd;
 
 public class GuiNPC extends GuiScreen
 {
-    //TODO: Prevent players from accepting a quest mutiple times before completing it
-
     protected List<GuiNPCQuestDialogue> selectableList = new ArrayList<GuiNPCQuestDialogue>();
+    private EntityNPC npc;
 
     /**
      * @param damagedEarth An instance of Damaged Earth
      * @param displayName  The visible name of the GUI
      * @param parentScreen The parent screen of the gui
      */
-    public GuiNPC(DamagedEarth damagedEarth, String displayName, GuiScreen parentScreen)
+    public GuiNPC(DamagedEarth damagedEarth, String displayName, GuiScreen parentScreen, EntityNPC npc)
     {
         super(damagedEarth, displayName, parentScreen);
+        this.npc = npc;
+
+        for (BasicQuest quest : npc.getGivableQuests())
+        {
+            GuiNPCQuestDialogue questDialogue = new GuiNPCQuestDialogue(quest.getQuestName(), "lalalala", false, this);
+            questDialogue.setQuest(quest);
+            this.selectableList.add(questDialogue);
+        }
+        this.npc.setGuiNPC(this);
     }
 
     @Override
@@ -138,5 +148,15 @@ public class GuiNPC extends GuiScreen
     public List<GuiNPCQuestDialogue> getSelectableList()
     {
         return selectableList;
+    }
+
+    public EntityNPC getNpc()
+    {
+        return npc;
+    }
+
+    public void setNpc(EntityNPC npc)
+    {
+        this.npc = npc;
     }
 }

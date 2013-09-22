@@ -27,6 +27,7 @@ public class BasicQuest
         this.thePlayer = thePlayer;
         this.questName = questName;
         this.questGiver = questGiver;
+        this.questGiver.getGivableQuests().add(this);
     }
 
     public String getQuestName()

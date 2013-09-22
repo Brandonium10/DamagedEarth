@@ -6,9 +6,6 @@ import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Utilities.Components.FileConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PlayerFileManager
 {
     /**

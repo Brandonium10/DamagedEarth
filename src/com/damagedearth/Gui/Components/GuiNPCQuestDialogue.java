@@ -60,6 +60,7 @@ public class GuiNPCQuestDialogue
                 if (isQuestComplete)
                 {
                     parentScreen.damagedEarth.currentWorld.thePlayer.finishQuest(quest);
+                    //Disables this selectable because the quest has been turned in
                     setEnabled(false);
                 }
                 else
@@ -186,6 +187,12 @@ public class GuiNPCQuestDialogue
             if (this.isSelected) this.whileSelected();
 
             if (this.quest.isComplete()) this.isQuestComplete = true;
+
+            //This disables the button if the player is currently working on the quest
+            if (parentScreen.damagedEarth.currentWorld.thePlayer.getOwnedQuests().contains(quest) && !quest.isComplete())
+            {
+                this.done.setEnabled(false);
+            }
         }
     }
 

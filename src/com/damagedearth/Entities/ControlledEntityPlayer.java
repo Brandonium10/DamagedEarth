@@ -262,7 +262,6 @@ public class ControlledEntityPlayer
         if (this.checkKey(Keyboard.KEY_S))
         {
             System.out.println("[Player] Saving the players data...");
-            //TODO: Fix weird file saving error
             this.currentWorld.damagedEarth.plyrManager.update(this);
             System.out.println("[Player] Saved the players data.");
         }

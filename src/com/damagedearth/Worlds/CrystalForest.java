@@ -3,13 +3,10 @@ package com.damagedearth.Worlds;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
-import com.damagedearth.Gui.Components.GuiNPCQuestDialogue;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CrystalForest extends BasicWorld
 {
@@ -48,34 +45,19 @@ public class CrystalForest extends BasicWorld
     @Override
     public void loadWorld()
     {
-        /*
-        Declare the NPC Gui's
-         */
-        this.guiDumbottom = new GuiNPC(damagedEarth, "Dumbbottom", null);
-        this.guiDumbottom.getSelectableList().add(new GuiNPCQuestDialogue("Test1 Name", "Test1 Desc", false, guiDumbottom));
-
-        /*
-        Declare the entities
-         */
-        this.npcDumbbottom = new EntityNPC("Dumbottom", thePlayer, guiDumbottom, 155, 100, 50, 50, damagedEarth, null, null, null, null);
+        //Set up NPC's GUIs and quests
+        this.npcDumbbottom = new EntityNPC("Dumbottom", thePlayer, 155, 100, 50, 50, damagedEarth, null, null, null, null);
+        this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom, "Treegiant", 2);
+        this.guiDumbottom = new GuiNPC(damagedEarth, "Dumbbottom", null, this.npcDumbbottom);
 
         this.enemyTreegiant1 = new EntityEnemy("Treegiant", thePlayer, 50, 500, 100, 60, 50, damagedEarth, new Point(700, 100), new Point(500, 100), null, null, 1.5, 3);
         this.enemyTreegiant2 = new EntityEnemy("Treegiant", thePlayer, 50, 200, 700, 60, 50, damagedEarth, new Point(500, 900), new Point(200, 700), null, null, 1.5, 3);
 
-        /*
-        Declare the NPC's quests and sets the quest declared to the correct selectable
-         */
-        this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom, "Treegiant", 2);
-        this.guiDumbottom.getSelectableList().get(0).setQuest(this.dumbottomTraining1);
-
-        /*
-        Add the entities to the entityList so they can be updated properly
-         */
         this.entityList.add(npcDumbbottom);
-
         this.entityList.add(enemyTreegiant1);
         this.entityList.add(enemyTreegiant2);
 
+        //This is for the file FW
         this.allWorldQuests.add(this.dumbottomTraining1);
 
         //This loads the player into the world with all proper data. This method MUST be called here

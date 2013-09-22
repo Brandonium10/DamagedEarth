@@ -14,13 +14,14 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class EntityNPC extends Entity
 {
+    //TODO: The file FW supports continuing quests that are in-complete, but if you complete the quest and save your info it won't load up next time. Fix it.
+
     List<BasicQuest> givableQuests = new ArrayList<BasicQuest>();
     GuiNPC guiNPC;
 
-    public EntityNPC(String name, ControlledEntityPlayer thePlayer, GuiNPC guiNPC, double defaultX, double defaultY, double width, double height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4)
+    public EntityNPC(String name, ControlledEntityPlayer thePlayer, double defaultX, double defaultY, double width, double height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4)
     {
         super(name, thePlayer, defaultX, defaultY, width, height, damagedEarth, des1, des2, des3, des4);
-        this.guiNPC = guiNPC;
     }
 
     @Override
@@ -79,5 +80,10 @@ public class EntityNPC extends Entity
     public GuiNPC getGuiNPC()
     {
         return guiNPC;
+    }
+
+    public void setGuiNPC(GuiNPC guiNPC)
+    {
+        this.guiNPC = guiNPC;
     }
 }
