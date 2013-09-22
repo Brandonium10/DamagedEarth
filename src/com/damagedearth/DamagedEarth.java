@@ -2,7 +2,6 @@ package com.damagedearth;
 
 import com.damagedearth.Gui.Components.GuiScreen;
 import com.damagedearth.Gui.GuiMainMenu;
-import com.damagedearth.Utilities.Components.EnumConfigurationType;
 import com.damagedearth.Utilities.PlayerFileManager;
 import com.damagedearth.Worlds.BasicWorld;
 import com.damagedearth.Worlds.CrystalForest;
@@ -26,13 +25,13 @@ public class DamagedEarth
     public BasicWorld currentWorld;
 
     //An instance of the player manager. Records all information related to the player
-    public PlayerFileManager playerManager;
+    public PlayerFileManager plyrManager;
 
     public DamagedEarth(int width, int height)
     {
         this.width = width;
         this.height = height;
-        this.playerManager = new PlayerFileManager("player-data");
+        this.plyrManager = new PlayerFileManager("player-location", "player-quests", this);
     }
 
     public void startGame()

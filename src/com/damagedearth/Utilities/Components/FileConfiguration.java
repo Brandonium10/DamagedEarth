@@ -16,8 +16,23 @@ public class FileConfiguration
         this.path = fileName;
     }
 
+    public void openOrCreateFile()
+    {
+        if (!thisFile.exists())
+        {
+            try
+            {
+                thisFile.createNewFile();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
-     * @param line The text you want to add
+     * @param line         The text you want to add
      * @param antiOverride Should the file not override?
      * @throws FileNotFoundException
      * @throws IOException
@@ -70,7 +85,6 @@ public class FileConfiguration
         }
         br.close();
         this.writeln(sb.toString(), false);
-        System.out.println("Edited " + this.thisFile.getName());
     }
 
     /**
@@ -98,31 +112,35 @@ public class FileConfiguration
         }
         br.close();
         this.writeln(sb.toString(), false);
-        System.out.println("Edited " + this.thisFile.getName());
     }
 
-    public String getLineValue(int lineNumber) throws FileNotFoundException, IOException
+    public FileConfiguration appendLine(String lineStart, String line) throws IOException
+    {
+        this.editLine(lineStart, this.getLineValue(lineStart) + line);
+        return this;
+    }
+
+    public String getLineValue(int lineNumber) throws NullPointerException, IOException
     {
         FileReader fr = new FileReader(this.thisFile);
         BufferedReader br = new BufferedReader(fr);
 
         String str;
-        StringBuilder sb = new StringBuilder();
         int currentLine = 1;
         while ((str = br.readLine()) != null)
         {
-            if (currentLine == lineNumber) {
+            if (currentLine == lineNumber)
+            {
                 br.close();
                 return str;
             }
             currentLine++;
         }
         br.close();
-        System.out.println("Edited " + this.thisFile.getName());
         return null;
     }
 
-    public String getLineValue(String lineStart) throws FileNotFoundException, IOException
+    public String getLineValue(String lineStart) throws NullPointerException, IOException
     {
         FileReader fr = new FileReader(this.thisFile);
         BufferedReader br = new BufferedReader(fr);
@@ -139,8 +157,54 @@ public class FileConfiguration
         }
         br.close();
         this.writeln(sb.toString(), false);
-        System.out.println("Edited " + this.thisFile.getName());
         return null;
+    }
+
+    public boolean doesLineExists(String lineStart)
+    {
+        if (!this.thisFile.exists())
+        {
+            return false;
+        }
+        try
+        {
+            if (this.getLineValue(lineStart).isEmpty())
+            {
+                return false;
+            }
+        }
+        catch (NullPointerException e)
+        {
+            return false;
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public int getLastLine() throws FileNotFoundException, IOException
+    {
+        FileReader fr = new FileReader(this.thisFile);
+        BufferedReader br = new BufferedReader(fr);
+
+        String str;
+        int lastLine = 0;
+        while ((str = br.readLine()) != null)
+        {
+            if (!str.isEmpty())
+            {
+                lastLine++;
+            }
+        }
+        br.close();
+        return lastLine;
+    }
+
+    public void clear() throws FileNotFoundException, IOException
+    {
+        this.writeln("", false);
     }
 
     public void encode() throws IOException

@@ -22,18 +22,17 @@ public class Entity
     protected int loopStep = 1;
 
     /**
-     *
-     * @param name The name of this entity
-     * @param thePlayer An instance of the player
-     * @param defaultX The x spawn location of this entity
-     * @param defaultY The y spawn location of this entity
-     * @param width The width of this entity
-     * @param height The height of this entity
+     * @param name         The name of this entity
+     * @param thePlayer    An instance of the player
+     * @param defaultX     The x spawn location of this entity
+     * @param defaultY     The y spawn location of this entity
+     * @param width        The width of this entity
+     * @param height       The height of this entity
      * @param damagedEarth An instance of DamagedEarth
-     * @param des1 First path cords
-     * @param des2 Second path cords
-     * @param des3 Third path cords
-     * @param des4 Fourth path cords
+     * @param des1         First path cords
+     * @param des2         Second path cords
+     * @param des3         Third path cords
+     * @param des4         Fourth path cords
      */
     public Entity(String name, ControlledEntityPlayer thePlayer, double defaultX, double defaultY, double width, double height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4)
     {
@@ -241,7 +240,6 @@ public class Entity
     }
 
     /**
-     *
      * @return Returns true if the entity is collided left with the player
      */
     protected boolean getEntityLeftCollided()
@@ -260,7 +258,6 @@ public class Entity
     }
 
     /**
-     *
      * @return Returns true if the entity is collided right with the player
      */
     protected boolean getEntityRightCollided()
@@ -279,7 +276,6 @@ public class Entity
     }
 
     /**
-     *
      * @return Returns true if the entity is collided at the bottom with the player
      */
     protected boolean getEntityBottomCollided()
@@ -298,7 +294,6 @@ public class Entity
     }
 
     /**
-     *
      * @return Returns true if the entity is collided at the top with the player
      */
     protected boolean getEntityTopCollided()

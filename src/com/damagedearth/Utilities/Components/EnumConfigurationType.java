@@ -16,7 +16,8 @@ public enum EnumConfigurationType
         this.configType = configType;
     }
 
-    public String getFriendlyName() {
+    public String getFriendlyName()
+    {
         return configType;
     }
 }

@@ -322,7 +322,7 @@ public class FontRenderer
                 new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         fontImage = op.filter(fontImage, null);
         int id = TextureLoader.loadTexture(fontImage);
-        System.out.println(id);
+        //System.out.println(id);
 
         base = GL11.glGenLists(256);                    // Storage For 256 Characters
 

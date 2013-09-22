@@ -62,14 +62,12 @@ public class ControlledEntityPlayer
     private int lastDirection;
 
     /**
-     * @param defaultX     The x coordinates of where the player will spawn
-     * @param defaultY     The y coordinates of where the player will spawn
      * @param width        The width of the player
      * @param height       The height of the player
      * @param currentWorld The world the player currently is
      * @param playerClass  The gameplay class the player chose
      */
-    public ControlledEntityPlayer(double defaultX, double defaultY, double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
+    public ControlledEntityPlayer(double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
     {
         this.width = width;
         this.height = height;
@@ -83,14 +81,6 @@ public class ControlledEntityPlayer
         this.damageModifier = 6;
         this.isDead = false;
         targetedEntity = null;
-
-        //If the player data file loads with any errors, the player will spawn in the world's default location. Otherwise, he will be spawned in the last saved place.
-        if (!this.currentWorld.damagedEarth.playerManager.loadLocation(this))
-        {
-            this.x = defaultX;
-            this.y = defaultY;
-            System.out.println("[Player] Error loading the player data file: loaded default spawn instead");
-        }
     }
 
     /*
@@ -183,6 +173,7 @@ public class ControlledEntityPlayer
     public void abandonQuest(BasicQuest quest)
     {
         this.ownedQuests.remove(quest);
+        quest.getQuestGiver().getGivableQuests().add(quest);
     }
 
     public void finishQuest(BasicQuest quest)
@@ -270,9 +261,10 @@ public class ControlledEntityPlayer
         }
         if (this.checkKey(Keyboard.KEY_S))
         {
-            System.out.println("[Player] Saving the players location...");
-            this.currentWorld.damagedEarth.playerManager.updateLocation(this);
-            System.out.println("[Player] Saved the players location.");
+            System.out.println("[Player] Saving the players data...");
+            //TODO: Fix weird file saving error
+            this.currentWorld.damagedEarth.plyrManager.update(this);
+            System.out.println("[Player] Saved the players data.");
         }
     }
 

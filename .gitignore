@@ -25,4 +25,5 @@ ehthumbs.db
 Thumbs.db
 
 #Special DamagedEarth related files
-player-data.txt
+player-location.txt
+player-quests.txt

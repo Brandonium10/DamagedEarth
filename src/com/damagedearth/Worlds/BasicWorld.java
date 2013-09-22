@@ -4,12 +4,18 @@ import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.ControlledEntityPlayer;
 import com.damagedearth.Entities.EnumPlayerClass;
+import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BasicWorld
 {
+    /*
+    The sole purpose of this list is for the getCorrespondingQuest() method.
+     */
+    List<BasicQuest> allWorldQuests = new ArrayList<BasicQuest>();
+
     protected int spawnX, spawnY;
     public ControlledEntityPlayer thePlayer;
     protected List<Entity> entityList = new ArrayList<Entity>();
@@ -21,7 +27,7 @@ public abstract class BasicWorld
         this.spawnX = spawnX;
         this.spawnY = spawnY;
         this.damagedEarth = damagedEarth;
-        thePlayer = new ControlledEntityPlayer(this.spawnX, this.spawnY, 40, 45, this, EnumPlayerClass.SCIENTIST);
+        thePlayer = new ControlledEntityPlayer(40, 45, this, EnumPlayerClass.SCIENTIST);
     }
 
     public abstract void gameLoop();
@@ -76,6 +82,18 @@ public abstract class BasicWorld
             DamagedEarth.TRANSLATE_MODIFIER_Y = -2;
             DamagedEarth.VIEW_CORDS_Y -= 2;
         }
+    }
+
+    public BasicQuest getCorrespondingQuest(String questName)
+    {
+        for (BasicQuest quest : this.allWorldQuests)
+        {
+            if (quest.getQuestName().equalsIgnoreCase(questName))
+            {
+                return quest;
+            }
+        }
+        return null;
     }
 
     public int getSpawnX()

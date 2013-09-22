@@ -11,12 +11,13 @@ import static org.lwjgl.opengl.GL11.glRectd;
 
 public class GuiNPC extends GuiScreen
 {
+    //TODO: Prevent players from accepting a quest mutiple times before completing it
+
     protected List<GuiNPCQuestDialogue> selectableList = new ArrayList<GuiNPCQuestDialogue>();
 
     /**
-     *
      * @param damagedEarth An instance of Damaged Earth
-     * @param displayName The visible name of the GUI
+     * @param displayName  The visible name of the GUI
      * @param parentScreen The parent screen of the gui
      */
     public GuiNPC(DamagedEarth damagedEarth, String displayName, GuiScreen parentScreen)

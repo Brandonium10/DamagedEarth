@@ -28,17 +28,16 @@ public class GuiButton
     }
 
     /**
-     *
-     * @param name The visible name of the button
-     * @param x The start x coordinates of the button
-     * @param y The start y coordinates of the button
-     * @param x2 The ending x coordinates of the button
-     * @param y2 The ending y coordination of the button
-     * @param run The runnable for which will be called when you click the button
+     * @param name      The visible name of the button
+     * @param x         The start x coordinates of the button
+     * @param y         The start y coordinates of the button
+     * @param x2        The ending x coordinates of the button
+     * @param y2        The ending y coordination of the button
+     * @param run       The runnable for which will be called when you click the button
      * @param isEnabled If the button is enabled or not
-     * @param r The red value of the button
-     * @param g The green value of the button
-     * @param b The blue value of the button
+     * @param r         The red value of the button
+     * @param g         The green value of the button
+     * @param b         The blue value of the button
      */
     public GuiButton(String name, int x, int y, int x2, int y2, Runnable run, boolean isEnabled, int r, int g, int b)
     {

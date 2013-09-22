@@ -3,11 +3,13 @@ package com.damagedearth.Worlds;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
+import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
 import com.damagedearth.Gui.Components.GuiNPCQuestDialogue;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CrystalForest extends BasicWorld
 {
@@ -39,6 +41,7 @@ public class CrystalForest extends BasicWorld
     {
     }
 
+    //TODO: Make loading NPC's quests more object oriented
     /*
     Initiate all entities and creates the GUI's for the NPC's
      */
@@ -72,5 +75,14 @@ public class CrystalForest extends BasicWorld
 
         this.entityList.add(enemyTreegiant1);
         this.entityList.add(enemyTreegiant2);
+
+        this.allWorldQuests.add(this.dumbottomTraining1);
+
+        //This loads the player into the world with all proper data. This method MUST be called here
+        if (!damagedEarth.plyrManager.load(thePlayer))
+        {
+            thePlayer.teleport(this.getSpawnX(), this.getSpawnY());
+            System.out.println("[Player] Error loading the player data file: loaded default values instead");
+        }
     }
 }
