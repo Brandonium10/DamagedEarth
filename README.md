@@ -7,20 +7,19 @@ between multiple classes including scientist and soldier.
 Helping Out
 =
 
-We are looking for programmers, artists, and musicians. Programmers must know how to OOP with Java and it is highly
-recommended that he/she uses an IDE. Artists must be good with making 8-Bit images and it is recommended that he/she
-uses a program such as Gimp or Photoshop. Musicians need to have skill and fit the "dark evil" theme into their toons.
-No matter what job you have, you must have a good imagination and understand what the average player would want.
+We have spots open for graphical designers, programmers, and musicians. The standard requirement for each spot is
+to be innovative and clever. Programmers must know the fundamentals of object-oriented programming.
 
-Forking and Requests
+Programming
 =
 
-1. Make sure your changes work. Compile and test thoroughly before submitting a pull request.
-2. Make sure your code is written in the Allman style.
-3. Submit only if the change is significant
+1. Make sure your changes are significant.
+2. Your coding must be written in the Allman style.
+3. Static variables must be written in all upper case (ex. public static TRANSLATE_MODIFIER_X)
+4. If pull requests take longer then a day to be accepted: email andrewmacu@me.com
 
 Contacting Lead Developers
 =
 
-1. Skype: virtualviper1, minecraftlover687
+1. Skype: virtualviper1, minecraftlover687, awesomedude1318
 2. Email: andrewmacu@me.com
