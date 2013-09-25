@@ -1,12 +1,14 @@
 package com.damagedearth.Worlds;
 
 import com.damagedearth.DamagedEarth;
+import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
 
 import java.awt.*;
+import java.util.Iterator;
 
 public class CrystalForest extends BasicWorld
 {
@@ -38,7 +40,6 @@ public class CrystalForest extends BasicWorld
     {
     }
 
-    //TODO: Make loading NPC's quests more object oriented
     /*
     Initiate all entities and creates the GUI's for the NPC's
      */
@@ -57,6 +58,17 @@ public class CrystalForest extends BasicWorld
         this.entityList.add(enemyTreegiant1);
         this.entityList.add(enemyTreegiant2);
 
+        //Loads every NPC's data from the file. This MUST be called here.
+        Iterator<Entity> eItr = this.entityList.iterator();
+        while (eItr.hasNext())
+        {
+            Entity entity = eItr.next();
+
+            if (entity instanceof EntityNPC)
+            {
+                entity.getNPCInstance().loadData();
+            }
+        }
         //This is for the file FW
         this.allWorldQuests.add(this.dumbottomTraining1);
 

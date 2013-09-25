@@ -16,11 +16,6 @@ public class DamagedEarth
     public int width;
     public int height;
 
-    public static int VIEW_CORDS_X = 0;
-    public static int VIEW_CORDS_Y = 0;
-    public static double TRANSLATE_MODIFIER_X = 0;
-    public static double TRANSLATE_MODIFIER_Y = 0;
-
     public GuiScreen currentScreen;
     public BasicWorld currentWorld;
 
@@ -93,12 +88,12 @@ public class DamagedEarth
         {
             glPopMatrix();
             {
-                glTranslated(-TRANSLATE_MODIFIER_X, -TRANSLATE_MODIFIER_Y, 0);
+                glTranslated(-BasicWorld.TRANSLATE_MODIFIER_X, -BasicWorld.TRANSLATE_MODIFIER_Y, 0);
             }
             glPushMatrix();
 
-            TRANSLATE_MODIFIER_X = 0;
-            TRANSLATE_MODIFIER_Y = 0;
+            BasicWorld.TRANSLATE_MODIFIER_X = 0;
+            BasicWorld.TRANSLATE_MODIFIER_Y = 0;
 
             //This will update and (re)render the current world
             this.currentWorld.updateAndRender();

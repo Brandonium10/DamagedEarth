@@ -1,7 +1,7 @@
 package com.damagedearth.Entities.Components;
 
 import com.damagedearth.DamagedEarth;
-import com.damagedearth.Entities.ControlledEntityPlayer;
+import com.damagedearth.Entities.EntityPlayer;
 
 import java.awt.*;
 
@@ -11,7 +11,7 @@ public class Entity
 {
 
     double x, y, defaultX, defaultY, width, height;
-    ControlledEntityPlayer thePlayer;
+    EntityPlayer thePlayer;
     DamagedEarth damagedEarth;
     String entityName;
 
@@ -34,7 +34,7 @@ public class Entity
      * @param des3         Third path cords
      * @param des4         Fourth path cords
      */
-    public Entity(String name, ControlledEntityPlayer thePlayer, double defaultX, double defaultY, double width, double height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4)
+    public Entity(String name, EntityPlayer thePlayer, double defaultX, double defaultY, double width, double height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4)
     {
         this.entityName = name;
         this.thePlayer = thePlayer;
@@ -321,7 +321,7 @@ public class Entity
         this.entityName = entityName;
     }
 
-    public ControlledEntityPlayer getThePlayer()
+    public EntityPlayer getThePlayer()
     {
         return thePlayer;
     }

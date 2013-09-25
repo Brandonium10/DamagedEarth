@@ -1,14 +1,14 @@
 package com.damagedearth.GameElements.Quests.Components;
 
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.Entities.ControlledEntityPlayer;
+import com.damagedearth.Entities.EntityPlayer;
 
 public class BasicQuest
 {
     /*
     TODO: Add other quest types to quest framework
      */
-    ControlledEntityPlayer thePlayer;
+    EntityPlayer thePlayer;
     EntityNPC questGiver;
 
     String questName;
@@ -16,18 +16,18 @@ public class BasicQuest
     EnumQuestType questType;
     boolean isComplete;
 
-    public BasicQuest(ControlledEntityPlayer thePlayer, String questName)
+    public BasicQuest(EntityPlayer thePlayer, String questName)
     {
         this.thePlayer = thePlayer;
         this.questName = questName;
     }
 
-    public BasicQuest(ControlledEntityPlayer thePlayer, String questName, EntityNPC questGiver)
+    public BasicQuest(EntityPlayer thePlayer, String questName, EntityNPC questGiver)
     {
         this.thePlayer = thePlayer;
         this.questName = questName;
         this.questGiver = questGiver;
-        this.questGiver.getGivableQuests().add(this);
+        this.questGiver.getCurrentQuests().add(this);
     }
 
     public String getQuestName()

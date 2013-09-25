@@ -1,7 +1,7 @@
 package com.damagedearth.Utilities;
 
 import com.damagedearth.DamagedEarth;
-import com.damagedearth.Entities.ControlledEntityPlayer;
+import com.damagedearth.Entities.EntityPlayer;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Utilities.Components.FileConfiguration;
@@ -28,13 +28,13 @@ public class PlayerFileManager
         this.damagedEarth = damagedEarth;
     }
 
-    public void update(ControlledEntityPlayer thePlayer)
+    public void update(EntityPlayer thePlayer)
     {
         this.updateQuests(thePlayer);
         this.updateLocation(thePlayer);
     }
 
-    public boolean load(ControlledEntityPlayer thePlayer)
+    public boolean load(EntityPlayer thePlayer)
     {
         return this.loadLocation(thePlayer) && this.loadQuests(thePlayer);
     }
@@ -45,7 +45,7 @@ public class PlayerFileManager
      *
      * @param thePlayer An instance of a player to use for saving location
      */
-    public void updateLocation(ControlledEntityPlayer thePlayer)
+    public void updateLocation(EntityPlayer thePlayer)
     {
         try
         {
@@ -69,7 +69,7 @@ public class PlayerFileManager
      * @param thePlayer An instance of the player
      * @return True if the file successfully loads without any errors (aka. If the file exists)
      */
-    public boolean loadLocation(ControlledEntityPlayer thePlayer)
+    public boolean loadLocation(EntityPlayer thePlayer)
     {
         try
         {
@@ -86,14 +86,14 @@ public class PlayerFileManager
         }
     }
 
-    public void updateQuests(ControlledEntityPlayer thePlayer)
+    public void updateQuests(EntityPlayer thePlayer)
     {
         try
         {
             //If the file exists then we will decode it and then clear it
             if (questsConfiguration.getFile().exists())
             {
-                questsConfiguration.decode();
+                //questsConfiguration.decode();
                 //Reset the file to we can rewrite
                 questsConfiguration.clear();
             }
@@ -105,7 +105,7 @@ public class PlayerFileManager
                     questsConfiguration.writeln(String.format("%s:%s", quest.getQuestName(), quest.getSlayingQuestInstance().getAmount()), true);
                 }
             }
-            questsConfiguration.encode();
+            //questsConfiguration.encode();
         }
         catch (Exception e)
         {
@@ -113,24 +113,28 @@ public class PlayerFileManager
         }
     }
 
-    public boolean loadQuests(ControlledEntityPlayer thePlayer)
+    //TODO: If the quest is complete, it won't register with the game if you load it from a file. Fix it. You must check if you killed all enemies, then set it to completed = true
+    public boolean loadQuests(EntityPlayer thePlayer)
     {
         try
         {
-            questsConfiguration.decode();
+            //questsConfiguration.decode();
 
             //Loops through every line and gets the corresponding quest for the data that line contains. Eventually adds the quest to the player's current quests.
             for (int i = 1; i <= questsConfiguration.getLastLine(); i++)
             {
-                String currentQuestName = questsConfiguration.getLineValue(i).split(":")[0];
-                int currentAmount = Integer.parseInt(questsConfiguration.getLineValue(i).split(":")[1]);
+                if (!questsConfiguration.getLineValue(i).isEmpty())
+                {
+                    String currentQuestName = questsConfiguration.getLineValue(i).split(":")[0];
+                    int currentAmount = Integer.parseInt(questsConfiguration.getLineValue(i).split(":")[1]);
 
-                BasicQuest currentQuest = damagedEarth.currentWorld.getCorrespondingQuest(currentQuestName);
-                currentQuest.getSlayingQuestInstance().setAmount(currentAmount);
-                thePlayer.acceptQuest(currentQuest);
+                    BasicQuest currentQuest = damagedEarth.currentWorld.getCorrespondingQuest(currentQuestName);
+                    currentQuest.getSlayingQuestInstance().setAmount(currentAmount);
+                    thePlayer.acceptQuest(currentQuest);
+                }
             }
 
-            questsConfiguration.encode();
+            //questsConfiguration.encode();
             return true;
         }
         catch (Exception e)

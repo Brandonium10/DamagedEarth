@@ -4,6 +4,7 @@ import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.Utilities.MouseHelper;
+import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class GuiNPC extends GuiScreen
         super(damagedEarth, displayName, parentScreen);
         this.npc = npc;
 
-        for (BasicQuest quest : npc.getGivableQuests())
+        for (BasicQuest quest : npc.getCurrentQuests())
         {
             GuiNPCQuestDialogue questDialogue = new GuiNPCQuestDialogue(quest.getQuestName(), "lalalala", false, this);
             questDialogue.setQuest(quest);
@@ -116,12 +117,13 @@ public class GuiNPC extends GuiScreen
     @Override
     public void updateScreen()
     {
-        int yOffset = DamagedEarth.VIEW_CORDS_Y + 194;
+        int yOffset = BasicWorld.VIEW_CORDS_Y + 194;
         this.drawGLScreen();
 
+        //Puts selectables in correct places
         for (GuiNPCQuestDialogue selectable : this.selectableList)
         {
-            selectable.setX(DamagedEarth.VIEW_CORDS_X + 4);
+            selectable.setX(BasicWorld.VIEW_CORDS_X + 4);
             selectable.setWidth(this.damagedEarth.width / 2 - 6);
             selectable.setY(yOffset);
             selectable.setHeight(100);
@@ -142,7 +144,7 @@ public class GuiNPC extends GuiScreen
     public void drawGLScreen()
     {
         //Make sure the rectangle is drawn in perspective with the scrolling cords
-        glRectd(DamagedEarth.VIEW_CORDS_X + 2, DamagedEarth.VIEW_CORDS_Y + 92, DamagedEarth.VIEW_CORDS_X + this.damagedEarth.width / 2, DamagedEarth.VIEW_CORDS_Y + this.damagedEarth.height - 2);
+        glRectd(BasicWorld.VIEW_CORDS_X + 2, BasicWorld.VIEW_CORDS_Y + 92, BasicWorld.VIEW_CORDS_X + this.damagedEarth.width / 2, BasicWorld.VIEW_CORDS_Y + this.damagedEarth.height - 2);
     }
 
     public List<GuiNPCQuestDialogue> getSelectableList()

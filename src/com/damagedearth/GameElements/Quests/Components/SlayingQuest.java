@@ -2,20 +2,20 @@ package com.damagedearth.GameElements.Quests.Components;
 
 import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.Entities.ControlledEntityPlayer;
+import com.damagedearth.Entities.EntityPlayer;
 
 public class SlayingQuest extends BasicQuest
 {
     protected String enemyToKill;
     protected int amount;
 
-    public SlayingQuest(ControlledEntityPlayer thePlayer, String questName)
+    public SlayingQuest(EntityPlayer thePlayer, String questName)
     {
         super(thePlayer, questName);
         this.questType = EnumQuestType.SLAYING;
     }
 
-    public SlayingQuest(ControlledEntityPlayer thePlayer, String questName, EntityNPC npcGiver, String enemyToKill, int amount)
+    public SlayingQuest(EntityPlayer thePlayer, String questName, EntityNPC npcGiver, String enemyToKill, int amount)
     {
         super(thePlayer, questName, npcGiver);
         this.questType = EnumQuestType.SLAYING;

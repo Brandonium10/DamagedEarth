@@ -1,6 +1,7 @@
 package com.damagedearth.Entities;
 
 import com.damagedearth.Entities.Components.Entity;
+import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.Utilities.MathHelper;
 import com.damagedearth.Utilities.MouseHelper;
@@ -15,7 +16,7 @@ import java.util.Random;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class ControlledEntityPlayer
+public class EntityPlayer
 {
     /**
      * @variable x   The x coordinates of the player
@@ -67,7 +68,7 @@ public class ControlledEntityPlayer
      * @param currentWorld The world the player currently is
      * @param playerClass  The gameplay class the player chose
      */
-    public ControlledEntityPlayer(double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
+    public EntityPlayer(double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
     {
         this.width = width;
         this.height = height;
@@ -166,19 +167,20 @@ public class ControlledEntityPlayer
     public void acceptQuest(BasicQuest quest)
     {
         this.ownedQuests.add(quest);
-        quest.getQuestGiver().getGivableQuests().remove(quest);
+        //quest.getQuestGiver().getCurrentQuests().remove(quest);
         System.out.println("[Player] Accepted quest: " + quest.getQuestName());
     }
 
     public void abandonQuest(BasicQuest quest)
     {
         this.ownedQuests.remove(quest);
-        quest.getQuestGiver().getGivableQuests().add(quest);
     }
 
     public void finishQuest(BasicQuest quest)
     {
         this.ownedQuests.remove(quest);
+        //Remove the quest from the NPC after the player turns it in
+        quest.getQuestGiver().getCurrentQuests().remove(quest);
         System.out.println("[Player] Player has turned in quest (" + quest.getQuestName() + ") to NPC (" + quest.getQuestGiver().getEntityName() + ")");
     }
 
@@ -264,6 +266,14 @@ public class ControlledEntityPlayer
             System.out.println("[Player] Saving the players data...");
             this.currentWorld.damagedEarth.plyrManager.update(this);
             System.out.println("[Player] Saved the players data.");
+
+            for (Entity e : this.currentWorld.getEntityList())
+            {
+                if (e instanceof EntityNPC)
+                {
+                    e.getNPCInstance().saveData();
+                }
+            }
         }
     }
 

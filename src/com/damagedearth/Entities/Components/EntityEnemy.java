@@ -1,7 +1,7 @@
 package com.damagedearth.Entities.Components;
 
 import com.damagedearth.DamagedEarth;
-import com.damagedearth.Entities.ControlledEntityPlayer;
+import com.damagedearth.Entities.EntityPlayer;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Utilities.MathHelper;
@@ -24,7 +24,7 @@ public class EntityEnemy extends Entity
     protected int attackDelay;
     private int attackCounter;
 
-    public EntityEnemy(String name, ControlledEntityPlayer thePlayer, int health, int defaultX, int defaultY, int width, int height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4, double speed, int averageDamage)
+    public EntityEnemy(String name, EntityPlayer thePlayer, int health, int defaultX, int defaultY, int width, int height, DamagedEarth damagedEarth, Point des1, Point des2, Point des3, Point des4, double speed, int averageDamage)
     {
         super(name, thePlayer, defaultX, defaultY, width, height, damagedEarth, des1, des2, des3, des4);
         this.speed = speed;

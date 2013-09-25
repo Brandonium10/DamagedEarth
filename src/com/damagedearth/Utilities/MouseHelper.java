@@ -1,6 +1,6 @@
 package com.damagedearth.Utilities;
 
-import com.damagedearth.DamagedEarth;
+import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Mouse;
 
 public class MouseHelper
@@ -44,8 +44,8 @@ public class MouseHelper
         double bottomSide = y;
         double topSide = y - height;
 
-        double mouseX = DamagedEarth.VIEW_CORDS_X + Mouse.getX();
-        double mouseY = (DamagedEarth.VIEW_CORDS_Y + (700 - Mouse.getY()));
+        double mouseX = BasicWorld.VIEW_CORDS_X + Mouse.getX();
+        double mouseY = (BasicWorld.VIEW_CORDS_Y + (700 - Mouse.getY()));
         /*
         System.out.printf("Left Side: %s\n", leftSide);
         System.out.printf("Right Side: %s\n", rightSide);

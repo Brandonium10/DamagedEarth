@@ -7,28 +7,13 @@ import java.io.*;
 
 public class FileConfiguration
 {
-    File thisFile;
-    String path;
+    private File thisFile;
+    private String path;
 
     public FileConfiguration(String fileName)
     {
         this.thisFile = new File(fileName);
         this.path = fileName;
-    }
-
-    public void openOrCreateFile()
-    {
-        if (!thisFile.exists())
-        {
-            try
-            {
-                thisFile.createNewFile();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -162,7 +147,7 @@ public class FileConfiguration
 
     public boolean doesLineExists(String lineStart)
     {
-        if (!this.thisFile.exists())
+        if (!this.getFile().exists())
         {
             return false;
         }
@@ -204,7 +189,19 @@ public class FileConfiguration
 
     public void clear() throws FileNotFoundException, IOException
     {
-        this.writeln("", false);
+        if (!this.getFile().exists()) return;
+
+        FileOutputStream fop = null;
+        String content = "";
+
+        fop = new FileOutputStream(thisFile);
+
+        // get the content in bytes
+        byte[] contentInBytes = content.getBytes();
+
+        fop.write(contentInBytes);
+        fop.flush();
+        fop.close();
     }
 
     public void encode() throws IOException

@@ -1,7 +1,7 @@
 package com.damagedearth.Gui.Components;
 
-import com.damagedearth.DamagedEarth;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Worlds.BasicWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,13 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GuiNPCQuestDialogue
 {
+    protected GuiButton done;
+    protected GuiButton cancel;
+    protected BasicQuest quest;
+    protected boolean isQuestComplete;
+    //Disables button if quest is turned in
+    protected boolean isQuestTurnedIn;
+    GuiScreen parentScreen;
     /**
      * TODO: Add support for entering in "before accept", "in complete", and "complete" dialogue for the dialogue box.
      */
@@ -24,13 +31,6 @@ public class GuiNPCQuestDialogue
     private List<String> dialogueBeforeAccept = new ArrayList<String>();
     private List<String> dialogueIncomplete = new ArrayList<String>();
     private List<String> dialogueComplete = new ArrayList<String>();
-    GuiScreen parentScreen;
-
-    protected GuiButton done;
-    protected GuiButton cancel;
-
-    protected BasicQuest quest;
-    protected boolean isQuestComplete;
 
     /**
      * @param title        The visible title of the selectable
@@ -46,10 +46,11 @@ public class GuiNPCQuestDialogue
         this.parentScreen = parentScreen;
         this.isEnabled = true;
         this.isQuestComplete = false;
+        this.isQuestTurnedIn = false;
 
-        done = new GuiButton("Okay", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
-                DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
-                DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4, DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
+        done = new GuiButton("Okay", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
+                BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
+                BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
         {
             @Override
             public void run()
@@ -61,7 +62,6 @@ public class GuiNPCQuestDialogue
                 {
                     parentScreen.damagedEarth.currentWorld.thePlayer.finishQuest(quest);
                     //Disables this selectable because the quest has been turned in
-                    setEnabled(false);
                 }
                 else
                 {
@@ -71,9 +71,9 @@ public class GuiNPCQuestDialogue
                 parentScreen.damagedEarth.switchScreen(null);
             }
         }, false, 0, 255, 0);
-        cancel = new GuiButton("Cancel", DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
-                DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
-                DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2, DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
+        cancel = new GuiButton("Cancel", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
+                BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
+                BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
         {
             @Override
             public void run()
@@ -113,7 +113,7 @@ public class GuiNPCQuestDialogue
         glRectf(this.x, this.y, this.x + this.width, this.y - this.height / 4);
         glRectf(this.x, this.y - height, this.x + this.width, this.y - this.height + this.height / 4);
         glColor4f(1, 1, 1, 0);
-        glRectf(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, DamagedEarth.VIEW_CORDS_Y + 92, DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 2);
+        glRectf(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, BasicWorld.VIEW_CORDS_Y + 92, BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 2);
         glPopAttrib();
         glPopMatrix();
     }
@@ -173,22 +173,34 @@ public class GuiNPCQuestDialogue
     {
         if (this.isEnabled())
         {
+            //If the quest is turned in this selectable along w/ all its buttons will be disabled.
+            if (this.isQuestTurnedIn)
+            {
+                this.setEnabled(false);
+                this.done.setEnabled(false);
+                this.cancel.setEnabled(false);
+                return;
+            }
+
             //Updates the buttons positions with the scrolling cords
-            done.setX(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2);
-            done.setY(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
-            done.setWidth(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4 - done.getX());
-            done.setHeight(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - done.getY());
-            cancel.setX(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4);
-            cancel.setY(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
-            cancel.setWidth(DamagedEarth.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2 - cancel.getX());
-            cancel.setHeight(DamagedEarth.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - cancel.getY());
+            done.setX(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2);
+            done.setY(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
+            done.setWidth(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4 - done.getX());
+            done.setHeight(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - done.getY());
+            cancel.setX(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4);
+            cancel.setY(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
+            cancel.setWidth(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2 - cancel.getX());
+            cancel.setHeight(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - cancel.getY());
 
             this.render();
             if (this.isSelected) this.whileSelected();
 
             if (this.quest.isComplete()) this.isQuestComplete = true;
 
-            //This disables the button if the player is currently working on the quest
+            //Checks if the parent NPC has the quest in currentQuests. If it doesn't, the quest is turned in and this selectable will be disabled.
+            if (!((GuiNPC) this.parentScreen).getNpc().getCurrentQuests().contains(quest)) this.isQuestTurnedIn = true;
+
+            //This disables the "okay" button if the player is currently working on the quest
             if (parentScreen.damagedEarth.currentWorld.thePlayer.getOwnedQuests().contains(quest) && !quest.isComplete())
             {
                 this.done.setEnabled(false);

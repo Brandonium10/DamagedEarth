@@ -2,7 +2,7 @@ package com.damagedearth.Worlds;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.Entity;
-import com.damagedearth.Entities.ControlledEntityPlayer;
+import com.damagedearth.Entities.EntityPlayer;
 import com.damagedearth.Entities.EnumPlayerClass;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 
@@ -11,13 +11,17 @@ import java.util.List;
 
 public abstract class BasicWorld
 {
+    public static int VIEW_CORDS_X = 0;
+    public static int VIEW_CORDS_Y = 0;
+    public static double TRANSLATE_MODIFIER_X = 0;
+    public static double TRANSLATE_MODIFIER_Y = 0;
     /*
-    The sole purpose of this list is for the getCorrespondingQuest() method.
+     The sole purpose of this list is for the getCorrespondingQuest() method.
      */
     List<BasicQuest> allWorldQuests = new ArrayList<BasicQuest>();
 
     protected int spawnX, spawnY;
-    public ControlledEntityPlayer thePlayer;
+    public EntityPlayer thePlayer;
     protected List<Entity> entityList = new ArrayList<Entity>();
 
     public DamagedEarth damagedEarth;
@@ -27,7 +31,7 @@ public abstract class BasicWorld
         this.spawnX = spawnX;
         this.spawnY = spawnY;
         this.damagedEarth = damagedEarth;
-        thePlayer = new ControlledEntityPlayer(40, 45, this, EnumPlayerClass.SCIENTIST);
+        thePlayer = new EntityPlayer(40, 45, this, EnumPlayerClass.SCIENTIST);
     }
 
     public abstract void gameLoop();
@@ -61,26 +65,26 @@ public abstract class BasicWorld
      */
     public void scrollWorld(double playerX, double playerY)
     {
-        if (playerX >= (DamagedEarth.VIEW_CORDS_X + damagedEarth.width) - 300)
+        if (playerX >= (VIEW_CORDS_X + damagedEarth.width) - 300)
         {
-            DamagedEarth.TRANSLATE_MODIFIER_X = 2;
-            DamagedEarth.VIEW_CORDS_X += 2;
+            TRANSLATE_MODIFIER_X = 2;
+            VIEW_CORDS_X += 2;
         }
-        else if (playerX <= (DamagedEarth.VIEW_CORDS_X) + 300)
+        else if (playerX <= (VIEW_CORDS_X) + 300)
         {
-            DamagedEarth.TRANSLATE_MODIFIER_X = -2;
-            DamagedEarth.VIEW_CORDS_X -= 2;
+            TRANSLATE_MODIFIER_X = -2;
+            VIEW_CORDS_X -= 2;
         }
 
-        if (playerY >= (DamagedEarth.VIEW_CORDS_Y + damagedEarth.height) - 100)
+        if (playerY >= (VIEW_CORDS_Y + damagedEarth.height) - 100)
         {
-            DamagedEarth.TRANSLATE_MODIFIER_Y = 2;
-            DamagedEarth.VIEW_CORDS_Y += 2;
+            TRANSLATE_MODIFIER_Y = 2;
+            VIEW_CORDS_Y += 2;
         }
-        else if (playerY <= (DamagedEarth.VIEW_CORDS_Y) + 100)
+        else if (playerY <= (VIEW_CORDS_Y) + 100)
         {
-            DamagedEarth.TRANSLATE_MODIFIER_Y = -2;
-            DamagedEarth.VIEW_CORDS_Y -= 2;
+            TRANSLATE_MODIFIER_Y = -2;
+            VIEW_CORDS_Y -= 2;
         }
     }
 
