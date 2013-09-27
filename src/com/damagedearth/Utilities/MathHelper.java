@@ -10,7 +10,7 @@ public class MathHelper
         }
         return false;
     }
-
+          //DANIEL WAZZZZZZ HEREEEEEEE SUCKA
     public static double getDistanceSq(double x1, double y1, double x2, double y2)
     {
         double xDifference = x1 - x2;
