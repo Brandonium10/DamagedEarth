@@ -15,7 +15,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class EntityNPC extends Entity
 {
-    //TODO: The file FW supports continuing quests that are in-complete, but if you complete the quest and save your info it won't load up next time. Fix it.
 
     List<BasicQuest> currentQuests = new ArrayList<BasicQuest>();
     GuiNPC guiNPC;

@@ -130,6 +130,7 @@ public class PlayerFileManager
 
                     BasicQuest currentQuest = damagedEarth.currentWorld.getCorrespondingQuest(currentQuestName);
                     currentQuest.getSlayingQuestInstance().setAmount(currentAmount);
+                    if (currentQuest.getSlayingQuestInstance().getAmount() <= 0) currentQuest.setComplete(true);
                     thePlayer.acceptQuest(currentQuest);
                 }
             }
