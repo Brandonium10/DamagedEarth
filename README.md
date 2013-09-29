@@ -21,4 +21,4 @@ Programming
 Contacting Lead Developers
 =
 
-1. Email: andrewmacu@me.com, ryank3egan@gmail.com
+http://thepredators.endofinternet.net/
