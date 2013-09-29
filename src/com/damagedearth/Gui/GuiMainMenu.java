@@ -18,6 +18,9 @@ public class GuiMainMenu extends GuiScreen
         super(damagedEarth, displayName);
     }
 
+    /**
+     * GuiMainMenu reacts a different way when dealing with button coordinates. That's why a custom handleInput() is being used.
+     */
     @Override
     public void handleInput()
     {
@@ -52,12 +55,20 @@ public class GuiMainMenu extends GuiScreen
     public void setUpGUI()
     {
         super.setUpGUI();
+        final GuiCreateCharacter guiCreateCharacter = new GuiCreateCharacter(damagedEarth, "Choose class", this);
         this.buttonList.add(new GuiButton("Start Game", damagedEarth.width / 4, damagedEarth.height / 4, damagedEarth.width - damagedEarth.width / 4, damagedEarth.height / 4 - 35, new Runnable()
         {
             @Override
             public void run()
             {
-                damagedEarth.switchScreen(null);
+                if (damagedEarth.plyrManager.loadClass(damagedEarth.currentWorld.thePlayer))
+                {
+                    damagedEarth.switchScreen(null);
+                }
+                else
+                {
+                    damagedEarth.switchScreen(guiCreateCharacter);
+                }
             }
         }, true));
 
@@ -67,7 +78,6 @@ public class GuiMainMenu extends GuiScreen
             public void run()
             {
                 System.exit(0);
-                System.out.println("alalalalal");
             }
         }, true));
     }

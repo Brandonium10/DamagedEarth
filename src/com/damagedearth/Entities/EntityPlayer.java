@@ -5,6 +5,7 @@ import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.Utilities.MathHelper;
 import com.damagedearth.Utilities.MouseHelper;
+import com.damagedearth.Utilities.PlayerFileManager;
 import com.damagedearth.Utilities.TextureLoader;
 import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
@@ -52,7 +53,6 @@ public class EntityPlayer
     private boolean keyStates[];
     private float speed;
     private BufferedImage currentPlayerImage = TextureLoader.loadImage("res/Player/Soldier/soldier.png");
-
     /*
     0 = starting position
     1 = right
@@ -66,15 +66,13 @@ public class EntityPlayer
      * @param width        The width of the player
      * @param height       The height of the player
      * @param currentWorld The world the player currently is
-     * @param playerClass  The gameplay class the player chose
      */
-    public EntityPlayer(double width, double height, BasicWorld currentWorld, EnumPlayerClass playerClass)
+    public EntityPlayer(double width, double height, BasicWorld currentWorld)
     {
         this.width = width;
         this.height = height;
         this.speed = 1.5F;
         this.currentWorld = currentWorld;
-        this.playerClass = playerClass;
         this.keyStates = new boolean[256];
         this.lastDirection = 0;
         this.averageDamage = 3;
@@ -350,6 +348,11 @@ public class EntityPlayer
         return level;
     }
 
+    public void setLevel(int level)
+    {
+        this.level = level;
+    }
+
     public int getDamageModifier()
     {
         return damageModifier;
@@ -378,11 +381,6 @@ public class EntityPlayer
     public void setSpeed(float speed)
     {
         this.speed = speed;
-    }
-
-    public void setLevel(int level)
-    {
-        this.level = level;
     }
 
     public int getXp()
@@ -428,5 +426,10 @@ public class EntityPlayer
     public void setTargetedEntity(Entity targetedEntity)
     {
         this.targetedEntity = targetedEntity;
+    }
+
+    public PlayerFileManager getPlyManager()
+    {
+        return currentWorld.damagedEarth.plyrManager;
     }
 }

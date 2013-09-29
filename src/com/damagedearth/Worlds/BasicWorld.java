@@ -3,7 +3,6 @@ package com.damagedearth.Worlds;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.EntityPlayer;
-import com.damagedearth.Entities.EnumPlayerClass;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public abstract class BasicWorld
         this.spawnX = spawnX;
         this.spawnY = spawnY;
         this.damagedEarth = damagedEarth;
-        thePlayer = new EntityPlayer(40, 45, this, EnumPlayerClass.SCIENTIST);
+        thePlayer = new EntityPlayer(40, 45, this);
     }
 
     public abstract void gameLoop();

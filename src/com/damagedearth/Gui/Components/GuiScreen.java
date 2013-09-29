@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GuiScreen
 {
-    protected DamagedEarth damagedEarth;
+    public DamagedEarth damagedEarth;
     private boolean keyStates[];
 
     protected List<GuiButton> buttonList = new ArrayList<GuiButton>();

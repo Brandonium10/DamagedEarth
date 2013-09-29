@@ -2,9 +2,12 @@ package com.damagedearth.Utilities;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.EntityPlayer;
+import com.damagedearth.Entities.EnumPlayerClass;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
 import com.damagedearth.Utilities.Components.FileConfiguration;
+
+import java.io.IOException;
 
 public class PlayerFileManager
 {
@@ -13,18 +16,22 @@ public class PlayerFileManager
      */
     private String locationsName;
     private String questsName;
+    private String className;
 
     private FileConfiguration locationConfiguration;
     private FileConfiguration questsConfiguration;
+    private FileConfiguration classConfiguration;
 
     private DamagedEarth damagedEarth;
 
-    public PlayerFileManager(String locationsName, String questsName, DamagedEarth damagedEarth)
+    public PlayerFileManager(String locationsName, String questsName, String className, DamagedEarth damagedEarth)
     {
         this.locationsName = locationsName;
         this.questsName = questsName;
+        this.className = className;
         this.locationConfiguration = new FileConfiguration(this.locationsName + ".txt");
         this.questsConfiguration = new FileConfiguration(this.questsName + ".txt");
+        this.classConfiguration = new FileConfiguration(this.className + ".txt");
         this.damagedEarth = damagedEarth;
     }
 
@@ -113,7 +120,6 @@ public class PlayerFileManager
         }
     }
 
-    //TODO: If the quest is complete, it won't register with the game if you load it from a file. Fix it. You must check if you killed all enemies, then set it to completed = true
     public boolean loadQuests(EntityPlayer thePlayer)
     {
         try
@@ -143,5 +149,43 @@ public class PlayerFileManager
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void rewriteClass(EnumPlayerClass enumPlayerClass)
+    {
+        try
+        {
+            classConfiguration.writeln(enumPlayerClass.toString(), false);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean loadClass(EntityPlayer thePlayer)
+    {
+        if (hasChosenClass())
+        {
+            try
+            {
+                thePlayer.setPlayerClass(EnumPlayerClass.getClassByString(classConfiguration.getLineValue(1)));
+                return true;
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean hasChosenClass()
+    {
+        return classConfiguration.getFile().exists();
     }
 }

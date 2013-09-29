@@ -26,7 +26,7 @@ public class DamagedEarth
     {
         this.width = width;
         this.height = height;
-        this.plyrManager = new PlayerFileManager("player-location", "player-quests", this);
+        this.plyrManager = new PlayerFileManager("player-location", "player-quests", "player-class", this);
     }
 
     public void startGame()

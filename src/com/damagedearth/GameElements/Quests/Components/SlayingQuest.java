@@ -33,7 +33,6 @@ public class SlayingQuest extends BasicQuest
             if (amount <= 0)
             {
                 this.isComplete = true;
-                System.out.println("Completed test quest");
             }
         }
     }
