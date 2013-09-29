@@ -21,5 +21,4 @@ Programming
 Contacting Lead Developers
 =
 
-1. Skype: virtualviper1, minecraftlover687
-2. Email: andrewmacu@me.com
+1. Email: andrewmacu@me.com, ryank3egan@gmail.com
