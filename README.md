@@ -8,6 +8,8 @@ This software is registered under the GNU General Public License. Damaged Earth 
 Damaged Earth is open to any developers that want to help, although if you want to become part of the team please apply on our [forums](http://thepredators.endofinternet.net/).
 Credit will be given to any *team member* that *participates actively* on the project. This game is written in Java.
 
+* If you find any issue while running the game please open a ticket.
+
 Requirements
 -
 
