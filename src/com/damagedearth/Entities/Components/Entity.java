@@ -2,6 +2,7 @@ package com.damagedearth.Entities.Components;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.EntityPlayer;
+import com.damagedearth.Utilities.Tesselator;
 
 import java.awt.*;
 
@@ -57,6 +58,9 @@ public class Entity
         this.strollEntity();
     }
 
+    /**
+     * TODO: Make strolling around look more realistic
+     */
     protected void strollEntity()
     {
         if (this instanceof EntityEnemy && ((EntityEnemy) this).seesPlayer)
@@ -211,20 +215,11 @@ public class Entity
 
     protected void renderEntity()
     {
-        glPushMatrix();
-        glPushAttrib(GL_CURRENT_BIT);
-        //Follow this format for OpenGL texture drawing
-        glColor3f(1, 0, 0);
-        glBegin(GL_QUADS);
-        {
-            glVertex2d(x, y);
-            glVertex2d(x + width, y);
-            glVertex2d(x + width, y - height);
-            glVertex2d(x, y - height);
-        }
-        glEnd();
-        glPopAttrib();
-        glPopMatrix();
+        Tesselator tesselator = new Tesselator();
+        tesselator.set(x, y, x + width, y - height);
+        tesselator.setColor(1, 0, 0);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
     }
 
     public void teleport(double x, double y)

@@ -1,5 +1,7 @@
 package com.damagedearth.Gui.Components;
 
+import com.damagedearth.Utilities.Tesselator;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class GuiButton
@@ -55,38 +57,11 @@ public class GuiButton
 
     private void drawButton()
     {
-        glPushAttrib(GL_CURRENT_BIT);
-
-        //This will be the normal image because he's holding a sword to his side.
-        //BufferedImage buttonImage = TextureLoader.loadImage();
-
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //ACT AS THOUGH YOUR LIFE DEPENDS ON THIS LINE!
-
-        //int id = TextureLoader.loadTexture(buttonImage);
-
-        //Follow this format for OpenGL texture drawing
-        glColor3f(r, g, b);
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2d(0, 0);
-            glVertex2d(x, y);
-            glTexCoord2d(1, 0);
-            glVertex2d(x + width, y);
-            glTexCoord2d(1, 1);
-            glVertex2d(x + width, y - height);
-            glTexCoord2d(0, 1);
-            glVertex2d(x, y - height);
-        }
-        glEnd();
-
-        glDisable(GL_TEXTURE_2D);
-        glDisable(GL_BLEND);
-        //glDeleteTextures(id);
-
-        glPopAttrib();
+        Tesselator tesselator = new Tesselator();
+        tesselator.set(x, y, x + width, y - height);
+        tesselator.setColor(r, g, b);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
     }
 
     public void click()

@@ -3,10 +3,7 @@ package com.damagedearth.Entities;
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
-import com.damagedearth.Utilities.MathHelper;
-import com.damagedearth.Utilities.MouseHelper;
-import com.damagedearth.Utilities.PlayerFileManager;
-import com.damagedearth.Utilities.TextureLoader;
+import com.damagedearth.Utilities.*;
 import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
 
@@ -113,34 +110,10 @@ public class EntityPlayer
      */
     private void renderPlayer()
     {
-        glPushMatrix();
-
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //ACT AS THOUGH YOUR LIFE DEPENDS ON THIS LINE!
-
-        int id = TextureLoader.loadTexture(currentPlayerImage);
-
-        //Follow this format for OpenGL texture drawing
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2d(0, 0);
-            glVertex2d(x, y);
-            glTexCoord2d(1, 0);
-            glVertex2d(x + width, y);
-            glTexCoord2d(1, 1);
-            glVertex2d(x + width, y - height);
-            glTexCoord2d(0, 1);
-            glVertex2d(x, y - height);
-        }
-        glEnd();
-
-        glDisable(GL_TEXTURE_2D);
-        glDisable(GL_BLEND);
-        glDeleteTextures(id);
-
-        glPopMatrix();
+        Tesselator tesselator = new Tesselator();
+        tesselator.set(x, y, x + width, y - height);
+        tesselator.startDrawingTextQuad(currentPlayerImage);
+        tesselator.endDrawingTextQuad();
     }
 
     /**

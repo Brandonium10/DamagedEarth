@@ -1,6 +1,7 @@
 package com.damagedearth.Gui.Components;
 
 import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Utilities.Tesselator;
 import com.damagedearth.Worlds.BasicWorld;
 
 import java.util.ArrayList;
@@ -107,15 +108,19 @@ public class GuiNPCQuestDialogue
         /*
         Renders button art and the dialogue box
          */
-        glPushMatrix();
-        glPushAttrib(GL_CURRENT_BIT);
-        glColor4f(0, 0, 0, 1);
-        glRectf(this.x, this.y, this.x + this.width, this.y - this.height / 4);
-        glRectf(this.x, this.y - height, this.x + this.width, this.y - this.height + this.height / 4);
-        glColor4f(1, 1, 1, 0);
-        glRectf(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, BasicWorld.VIEW_CORDS_Y + 92, BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 2);
-        glPopAttrib();
-        glPopMatrix();
+        Tesselator tesselator = new Tesselator();
+
+        tesselator.set(this.x, this.y, this.x + this.width, this.y - this.height / 4);
+        tesselator.setColor(0, 0, 0, 1);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
+        tesselator.set(this.x, this.y - height, this.x + this.width, this.y - this.height + this.height / 4);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
+        tesselator.setColor(1, 1, 1, 0);
+        tesselator.set(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, BasicWorld.VIEW_CORDS_Y + 92, BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 2);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
     }
 
     private void onSelect()
@@ -151,19 +156,11 @@ public class GuiNPCQuestDialogue
 
     private void render()
     {
-        try
-        {
-            glPushMatrix();
-            glPushAttrib(GL_CURRENT_BIT);
-            glColor4f(0.5f, 0.5f, 0.5f, 0.5f);
-            glRecti(this.x, this.y, this.x + this.width, this.y - this.height);
-            glPopAttrib();
-            glPopMatrix();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        Tesselator tesselator = new Tesselator();
+        tesselator.set(x, y, x + width, y - height);
+        tesselator.setColor(0.5f, 0.5f, 0.5f, 0.5f);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
     }
 
     /*

@@ -2,6 +2,7 @@ package com.damagedearth.Gui.Components.CreateCharacter;
 
 import com.damagedearth.Entities.EntityPlayer;
 import com.damagedearth.Entities.EnumPlayerClass;
+import com.damagedearth.Utilities.Tesselator;
 import com.damagedearth.Utilities.TextureLoader;
 
 import java.awt.image.BufferedImage;
@@ -36,34 +37,10 @@ public class GuiClass
 
     private void render()
     {
-        glPushMatrix();
-
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //ACT AS THOUGH YOUR LIFE DEPENDS ON THIS LINE!
-
-        int id = TextureLoader.loadTexture(renderedImage);
-
-        //Follow this format for OpenGL texture drawing
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2d(0, 0);
-            glVertex2d(x, y);
-            glTexCoord2d(1, 0);
-            glVertex2d(x + width, y);
-            glTexCoord2d(1, 1);
-            glVertex2d(x + width, y - height);
-            glTexCoord2d(0, 1);
-            glVertex2d(x, y - height);
-        }
-        glEnd();
-
-        glDisable(GL_TEXTURE_2D);
-        glDisable(GL_BLEND);
-        glDeleteTextures(id);
-
-        glPopMatrix();
+        Tesselator tesselator = new Tesselator();
+        tesselator.set(x, y, x + width, y - height);
+        tesselator.startDrawingTextQuad(renderedImage);
+        tesselator.endDrawingTextQuad();
     }
 
     public void onClick()

@@ -6,6 +6,7 @@ import com.damagedearth.GameElements.Quests.Components.BasicQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
 import com.damagedearth.Utilities.MouseHelper;
 import com.damagedearth.Utilities.NPCFileManager;
+import com.damagedearth.Utilities.Tesselator;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -67,18 +68,11 @@ public class EntityNPC extends Entity
     @Override
     protected void renderEntity()
     {
-        glPushAttrib(GL_CURRENT_BIT);
-        //Follow this format for OpenGL texture drawing
-        glColor3f(0, 1, 0);
-        glBegin(GL_QUADS);
-        {
-            glVertex2d(x, y);
-            glVertex2d(x + width, y);
-            glVertex2d(x + width, y - height);
-            glVertex2d(x, y - height);
-        }
-        glEnd();
-        glPopAttrib();
+        Tesselator tesselator = new Tesselator();
+        tesselator.set(x, y, x + width, y - height);
+        tesselator.setColor(0, 1, 0);
+        tesselator.startDrawingCQuad();
+        tesselator.endDrawingQuad();
     }
 
     public List<BasicQuest> getCurrentQuests()
