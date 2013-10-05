@@ -1,4 +1,4 @@
-package com.damagedearth.GameElements.Quests.Components;
+package com.damagedearth.Gameplay.Quests;
 
 import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;

@@ -1,8 +1,8 @@
 package com.damagedearth.Utilities;
 
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
-import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
+import com.damagedearth.Gameplay.Quests.SlayingQuest;
 import com.damagedearth.Utilities.Components.FileConfiguration;
 
 import java.io.IOException;

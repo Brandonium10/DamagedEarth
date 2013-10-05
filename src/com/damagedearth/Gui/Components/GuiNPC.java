@@ -2,8 +2,9 @@ package com.damagedearth.Gui.Components;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
 import com.damagedearth.Utilities.MouseHelper;
+import com.damagedearth.Utilities.Tesselator;
 import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
 
@@ -51,7 +52,7 @@ public class GuiNPC extends GuiScreen
             {
                 if (selectableDialogue.isEnabled())
                 {
-                    if (MouseHelper.insideAreaW(selectableDialogue.getX(), selectableDialogue.getY(), selectableDialogue.getWidth(), selectableDialogue.getHeight()))
+                    if (MouseHelper.insideArea(selectableDialogue.getX(), selectableDialogue.getY(), selectableDialogue.getWidth(), selectableDialogue.getHeight()))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(0, selectableDialogue));
                     }
@@ -61,7 +62,7 @@ public class GuiNPC extends GuiScreen
             {
                 if (button.isEnabled)
                 {
-                    if (MouseHelper.insideAreaW(button.x, button.y, button.width, button.height))
+                    if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(0, button));
                     }
@@ -74,7 +75,7 @@ public class GuiNPC extends GuiScreen
             {
                 if (selectableDialogue.isEnabled())
                 {
-                    if (MouseHelper.insideAreaW(selectableDialogue.getX(), selectableDialogue.getY(), selectableDialogue.getWidth(), selectableDialogue.getHeight()))
+                    if (MouseHelper.insideArea(selectableDialogue.getX(), selectableDialogue.getY(), selectableDialogue.getWidth(), selectableDialogue.getHeight()))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(1, selectableDialogue));
                     }
@@ -84,7 +85,7 @@ public class GuiNPC extends GuiScreen
             {
                 if (button.isEnabled)
                 {
-                    if (MouseHelper.insideAreaW(button.x, button.y, button.width, button.height))
+                    if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(0, button));
                     }
@@ -117,7 +118,7 @@ public class GuiNPC extends GuiScreen
     @Override
     public void updateScreen()
     {
-        int yOffset = BasicWorld.VIEW_CORDS_Y + 194;
+        int yOffset = BasicWorld.VIEW_CORDS_Y + damagedEarth.height - 94;
         this.drawGLScreen();
 
         //Puts selectables in correct places
@@ -137,6 +138,10 @@ public class GuiNPC extends GuiScreen
         {
             button.update();
         }
+        Tesselator tesselator = new Tesselator();
+        //Draws the NPC's name centered horizontally on the top of the screen
+        tesselator.drawCenterString(getNpc().getEntityName(), BasicWorld.VIEW_CORDS_X + damagedEarth.width / 2, BasicWorld.VIEW_CORDS_Y + damagedEarth.height - 28);
+
         this.handleInput();
     }
 
@@ -144,7 +149,7 @@ public class GuiNPC extends GuiScreen
     public void drawGLScreen()
     {
         //Make sure the rectangle is drawn in perspective with the scrolling cords
-        glRectd(BasicWorld.VIEW_CORDS_X + 2, BasicWorld.VIEW_CORDS_Y + 92, BasicWorld.VIEW_CORDS_X + this.damagedEarth.width / 2, BasicWorld.VIEW_CORDS_Y + this.damagedEarth.height - 2);
+        glRectd(BasicWorld.VIEW_CORDS_X + 2, BasicWorld.VIEW_CORDS_Y + damagedEarth.height - 92, BasicWorld.VIEW_CORDS_X + this.damagedEarth.width / 2, BasicWorld.VIEW_CORDS_Y + 2);
     }
 
     public List<GuiNPCQuestDialogue> getSelectableList()

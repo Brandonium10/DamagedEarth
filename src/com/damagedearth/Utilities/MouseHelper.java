@@ -8,44 +8,18 @@ public class MouseHelper
     static boolean mouseStates[] = new boolean[2];
 
     /*
-    Sees if the mouse coordinates are within an area on the display
+    Sees if mouse coordinates are within an area
      */
-    public static boolean insideAreaD(int x, int y, int width, int height)
-    {
-
-        int leftSide = x;
-        int rightSide = x + width;
-        int topSide = y;
-        int bottomSide = y - height;
-
-        int mouseX = Mouse.getX();
-        int mouseY = 700 - Mouse.getY();
-
-        /*
-        System.out.printf("Left Side: %s\n", leftSide);
-        System.out.printf("Right Side: %s\n", rightSide);
-        System.out.printf("Top Side: %s\n", topSide);
-        System.out.printf("Bottom Side: %s\n", bottomSide);
-        System.out.printf("Mouse X: %s\n", mouseX);
-        System.out.printf("Mouse Y: %s\n\n", mouseY);
-        */
-
-        return mouseX >= leftSide && mouseX <= rightSide && mouseY >= topSide && mouseY <= bottomSide;
-    }
-
-    /*
-    Sees if mouse coordinates are within an area on the world
-     */
-    public static boolean insideAreaW(double x, double y, double width, double height)
+    public static boolean insideArea(double x, double y, double width, double height)
     {
 
         double leftSide = x;
         double rightSide = x + width;
-        double bottomSide = y;
-        double topSide = y - height;
+        double topSide = y;
+        double bottomSide = y - height;
 
         double mouseX = BasicWorld.VIEW_CORDS_X + Mouse.getX();
-        double mouseY = (BasicWorld.VIEW_CORDS_Y + (700 - Mouse.getY()));
+        double mouseY = (BasicWorld.VIEW_CORDS_Y + (Mouse.getY()));
         /*
         System.out.printf("Left Side: %s\n", leftSide);
         System.out.printf("Right Side: %s\n", rightSide);
@@ -54,8 +28,7 @@ public class MouseHelper
         System.out.printf("Mouse X: %s\n", mouseX);
         System.out.printf("Mouse Y: %s\n\n", mouseY);
         */
-
-        return mouseX >= leftSide && mouseX <= rightSide && mouseY >= topSide && mouseY <= bottomSide;
+        return mouseX >= leftSide && mouseX <= rightSide && mouseY <= topSide && mouseY >= bottomSide;
     }
 
     /*

@@ -4,7 +4,7 @@ import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.Components.EntityEnemy;
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
+import com.damagedearth.Gameplay.Quests.SlayingQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
 
 import java.awt.*;
@@ -47,11 +47,11 @@ public class CrystalForest extends BasicWorld
     public void loadWorld()
     {
         //Set up NPC's GUIs and quests
-        this.npcDumbbottom = new EntityNPC("Dumbottom", thePlayer, 155, 100, 50, 50, damagedEarth, null, null, null, null);
+        this.npcDumbbottom = new EntityNPC("Dumbottom", thePlayer, 155, 900, 50, 50, damagedEarth, null, null, null, null);
         this.dumbottomTraining1 = new SlayingQuest(this.thePlayer, "Training1", this.npcDumbbottom, "Treegiant", 2);
         this.guiDumbottom = new GuiNPC(damagedEarth, "Dumbbottom", null, this.npcDumbbottom);
 
-        this.enemyTreegiant1 = new EntityEnemy("Treegiant", thePlayer, 50, 500, 100, 60, 50, damagedEarth, new Point(700, 100), new Point(500, 100), null, null, 1.5, 3);
+        this.enemyTreegiant1 = new EntityEnemy("Treegiant", thePlayer, 50, 500, 900, 60, 50, damagedEarth, new Point(700, 100), new Point(500, 100), null, null, 1.5, 3);
         this.enemyTreegiant2 = new EntityEnemy("Treegiant", thePlayer, 50, 200, 700, 60, 50, damagedEarth, new Point(500, 900), new Point(200, 700), null, null, 1.5, 3);
 
         this.entityList.add(npcDumbbottom);

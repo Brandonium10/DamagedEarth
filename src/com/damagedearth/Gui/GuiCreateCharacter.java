@@ -5,8 +5,6 @@ import com.damagedearth.Entities.EnumPlayerClass;
 import com.damagedearth.Gui.Components.CreateCharacter.GuiClass;
 import com.damagedearth.Gui.Components.GuiButton;
 import com.damagedearth.Gui.Components.GuiScreen;
-import com.damagedearth.Utilities.MouseHelper;
-import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,39 +56,7 @@ public class GuiCreateCharacter extends GuiScreen
     @Override
     protected void handleInput()
     {
-        if (MouseHelper.getMouseClick(0))
-        {
-            for (GuiButton button : this.buttonList)
-            {
-                if (MouseHelper.insideAreaD(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
-                {
-                    System.out.println("Button has been clicked: " + mouseAction(0, button));
-                }
-            }
-
-            for (GuiClass currentClass : this.classes)
-            {
-                if (MouseHelper.insideAreaW(currentClass.getX(), currentClass.getY(), currentClass.getWidth(), currentClass.getHeight()))
-                {
-                    currentClass.onClick();
-                }
-            }
-        }
-        else if (MouseHelper.getMouseClick(1))
-        {
-            for (GuiButton button : this.buttonList)
-            {
-                if (MouseHelper.insideAreaD(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
-                {
-                    System.out.println("Button has been clicked: " + mouseAction(1, button));
-                }
-            }
-        }
-
-        if (this.checkKey(Keyboard.KEY_ESCAPE))
-        {
-            this.damagedEarth.switchScreen(this.parentScreen);
-        }
+        super.handleInput();
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.damagedearth.Entities.Components;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.EntityPlayer;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
-import com.damagedearth.GameElements.Quests.Components.SlayingQuest;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
+import com.damagedearth.Gameplay.Quests.SlayingQuest;
 import com.damagedearth.Utilities.MathHelper;
 
 import java.awt.*;

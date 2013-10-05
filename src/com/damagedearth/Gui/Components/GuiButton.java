@@ -2,8 +2,6 @@ package com.damagedearth.Gui.Components;
 
 import com.damagedearth.Utilities.Tesselator;
 
-import static org.lwjgl.opengl.GL11.*;
-
 public class GuiButton
 {
     int x = 0, y = 0, width = 0, height = 0;
@@ -15,39 +13,37 @@ public class GuiButton
     /*
     This constructor is for white buttons
      */
-    public GuiButton(String name, int x, int y, int x2, int y2, Runnable run, boolean isEnabled)
+    public GuiButton(String name, int x, int y, int width, int height, Runnable run, boolean isEnabled)
     {
         this.name = name;
         this.x = x;
         this.y = y;
-        this.width = x2 - x;
-        this.height = y2 - y;
+        this.width = width;
+        this.height = height;
         this.run = run;
         this.isEnabled = isEnabled;
-        this.r = 255;
-        this.g = 255;
-        this.b = 255;
+        this.r = 1;
+        this.g = 0;
+        this.b = 0;
     }
 
     /**
      * @param name      The visible name of the button
      * @param x         The start x coordinates of the button
      * @param y         The start y coordinates of the button
-     * @param x2        The ending x coordinates of the button
-     * @param y2        The ending y coordination of the button
      * @param run       The runnable for which will be called when you click the button
      * @param isEnabled If the button is enabled or not
      * @param r         The red value of the button
      * @param g         The green value of the button
      * @param b         The blue value of the button
      */
-    public GuiButton(String name, int x, int y, int x2, int y2, Runnable run, boolean isEnabled, int r, int g, int b)
+    public GuiButton(String name, int x, int y, int width, int height, Runnable run, boolean isEnabled, int r, int g, int b)
     {
         this.name = name;
         this.x = x;
         this.y = y;
-        this.width = x2 - x;
-        this.height = y2 - y;
+        this.width = width;
+        this.height = height;
         this.run = run;
         this.isEnabled = isEnabled;
         this.r = r;
@@ -62,6 +58,7 @@ public class GuiButton
         tesselator.setColor(r, g, b);
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
+        tesselator.drawCenterString(name, x + width / 2, y - height / 2 - 12);
     }
 
     public void click()

@@ -2,7 +2,7 @@ package com.damagedearth.Entities.Components;
 
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.EntityPlayer;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
 import com.damagedearth.Gui.Components.GuiNPC;
 import com.damagedearth.Utilities.MouseHelper;
 import com.damagedearth.Utilities.NPCFileManager;
@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glRectd;
 
 public class EntityNPC extends Entity
 {
@@ -51,10 +51,10 @@ public class EntityNPC extends Entity
     {
         if (this.guiNPC != null)
         {
-            if (MouseHelper.insideAreaW((int) this.x, (int) this.y, (int) this.width, (int) this.height) && this.thePlayer.nearEntity(this))
+            if (MouseHelper.insideArea((int) this.x, (int) this.y, (int) this.width, (int) this.height) && this.thePlayer.nearEntity(this))
             {
                 //Draws the speech bubble over the entity
-                glRectd(this.x, this.y - this.height - 40, this.x + width, this.y - this.height - 2);
+                glRectd(this.x, this.y + 40, this.x + width, this.y + 2);
                 if (MouseHelper.getMouseClick(1))
                 {
                     //Switches to the NPC's screen when you click on him

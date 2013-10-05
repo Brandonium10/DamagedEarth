@@ -1,4 +1,4 @@
-package com.damagedearth.GameElements.Quests.Components;
+package com.damagedearth.Gameplay.Quests;
 
 public enum EnumQuestType
 {

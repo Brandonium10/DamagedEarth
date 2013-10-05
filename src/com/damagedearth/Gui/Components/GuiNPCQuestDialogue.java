@@ -1,13 +1,11 @@
 package com.damagedearth.Gui.Components;
 
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
 import com.damagedearth.Utilities.Tesselator;
 import com.damagedearth.Worlds.BasicWorld;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class GuiNPCQuestDialogue
 {
@@ -50,8 +48,8 @@ public class GuiNPCQuestDialogue
         this.isQuestTurnedIn = false;
 
         done = new GuiButton("Okay", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
-                BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
-                BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
+                BasicWorld.VIEW_CORDS_Y + 224,
+                245, 114, new Runnable()
         {
             @Override
             public void run()
@@ -73,8 +71,8 @@ public class GuiNPCQuestDialogue
             }
         }, false, 0, 255, 0);
         cancel = new GuiButton("Cancel", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
-                BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104,
-                BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4, new Runnable()
+                BasicWorld.VIEW_CORDS_Y + 224,
+                245, 114, new Runnable()
         {
             @Override
             public void run()
@@ -118,7 +116,7 @@ public class GuiNPCQuestDialogue
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
         tesselator.setColor(1, 1, 1, 0);
-        tesselator.set(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, BasicWorld.VIEW_CORDS_Y + 92, BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 2);
+        tesselator.set(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, BasicWorld.VIEW_CORDS_Y + parentScreen.damagedEarth.height - 92, BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, BasicWorld.VIEW_CORDS_Y + 2);
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
     }
@@ -170,6 +168,7 @@ public class GuiNPCQuestDialogue
     {
         if (this.isEnabled())
         {
+            Tesselator tesselator = new Tesselator();
             //If the quest is turned in this selectable along w/ all its buttons will be disabled.
             if (this.isQuestTurnedIn)
             {
@@ -181,16 +180,14 @@ public class GuiNPCQuestDialogue
 
             //Updates the buttons positions with the scrolling cords
             done.setX(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2);
-            done.setY(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
-            done.setWidth(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 4 - done.getX());
-            done.setHeight(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - done.getY());
+            done.setY(BasicWorld.VIEW_CORDS_Y + 120);
             cancel.setX(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4);
-            cancel.setY(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 104);
-            cancel.setWidth(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 - 2 - cancel.getX());
-            cancel.setHeight(BasicWorld.VIEW_CORDS_Y + this.parentScreen.damagedEarth.height - 4 - cancel.getY());
+            cancel.setY(BasicWorld.VIEW_CORDS_Y + 120);
 
             this.render();
             if (this.isSelected) this.whileSelected();
+            //Draw quest name on selectable
+            tesselator.drawString(this.quest.getQuestName(), x, y - 27, 25);
 
             if (this.quest.isComplete()) this.isQuestComplete = true;
 

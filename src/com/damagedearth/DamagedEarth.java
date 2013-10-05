@@ -8,6 +8,7 @@ import com.damagedearth.Worlds.CrystalForest;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -35,7 +36,7 @@ public class DamagedEarth
         System.out.println("~~~GAME START INITIATED~~~");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         //Loads the CrystalForest world on start up
-        this.loadWorld(new CrystalForest(100, 100, this));
+        this.loadWorld(new CrystalForest(100, 800, this));
         this.loadDisplay();
 
         //This is the game update. Rendering is done here along with other tasks that need to be called repeatedly
@@ -63,10 +64,15 @@ public class DamagedEarth
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setResizable(false);
             Display.create();
+            GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+            GL11.glDisable(GL11.GL_DITHER);
+            GL11.glEnable(GL11.GL_NORMALIZE); // calculated normals when scaling
+            GL11.glHint(GL11.GL_PERSPECTIVE_CORRECTION_HINT, GL11.GL_NICEST); // High quality visuals
+            GL11.glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_NICEST); //  Really Nice Perspective Calculations
             glViewport(0, 0, (int) this.width, (int) this.height);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho(0, width, height, 0, -1, 1);
+            glOrtho(0, width, 0, height, 0, 25);
             glMatrixMode(GL_MODELVIEW);
             //This switches to the main menu on startGame up
             this.switchScreen(new GuiMainMenu(this, "DamagedEarth"));

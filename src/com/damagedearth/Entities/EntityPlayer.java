@@ -2,7 +2,9 @@ package com.damagedearth.Entities;
 
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.Components.EntityNPC;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Gameplay.Items.Inventory;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
+import com.damagedearth.Gui.Components.GuiInventory;
 import com.damagedearth.Utilities.*;
 import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
@@ -11,8 +13,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class EntityPlayer
 {
@@ -45,6 +45,7 @@ public class EntityPlayer
     private EnumPlayerClass playerClass;
     private BasicWorld currentWorld;
     private List<BasicQuest> ownedQuests = new ArrayList<BasicQuest>();
+    private Inventory inventory;
     private int averageDamage;
     private int damageModifier;
     private boolean keyStates[];
@@ -77,6 +78,7 @@ public class EntityPlayer
         this.damageModifier = 6;
         this.isDead = false;
         targetedEntity = null;
+        this.inventory = new Inventory(this.currentWorld.damagedEarth);
     }
 
     /*
@@ -192,7 +194,7 @@ public class EntityPlayer
         {
             for (Entity e : this.currentWorld.getEntityList())
             {
-                if (MouseHelper.insideAreaW(e.getX(), e.getY(), e.getWidth(), e.getHeight()))
+                if (MouseHelper.insideArea(e.getX(), e.getY(), e.getWidth(), e.getHeight()))
                 {
                     this.setTargetedEntity(e);
                     System.out.println("Entity targeted: " + e.getEntityName());
@@ -212,7 +214,7 @@ public class EntityPlayer
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
         {
-            this.move(0, speed);
+            this.move(0, -speed);
             this.lastDirection = 4;
             currentPlayerImage = TextureLoader.loadImage("res/Player/Soldier/soldier.png");
         }
@@ -224,7 +226,7 @@ public class EntityPlayer
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_UP))
         {
-            this.move(0, -speed);
+            this.move(0, speed);
             this.lastDirection = 3;
             currentPlayerImage = TextureLoader.loadImage("res/Player/Soldier/soldier-back.png");
         }
@@ -245,6 +247,10 @@ public class EntityPlayer
                     e.getNPCInstance().saveData();
                 }
             }
+        }
+        if (this.checkKey(Keyboard.KEY_E))
+        {
+            currentWorld.damagedEarth.switchScreen(new GuiInventory(currentWorld.damagedEarth, "Inventory", null));
         }
     }
 
@@ -401,8 +407,14 @@ public class EntityPlayer
         this.targetedEntity = targetedEntity;
     }
 
+    public Inventory getInventory()
+    {
+        return inventory;
+    }
+
     public PlayerFileManager getPlyManager()
     {
         return currentWorld.damagedEarth.plyrManager;
+
     }
 }

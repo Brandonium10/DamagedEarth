@@ -3,7 +3,7 @@ package com.damagedearth.Worlds;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.EntityPlayer;
-import com.damagedearth.GameElements.Quests.Components.BasicQuest;
+import com.damagedearth.Gameplay.Quests.BasicQuest;
 
 import java.util.ArrayList;
 import java.util.List;

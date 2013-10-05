@@ -1,7 +1,7 @@
 package com.damagedearth.Gui.Components;
 
 import com.damagedearth.DamagedEarth;
-import com.damagedearth.Utilities.Components.FontRenderer;
+import com.damagedearth.Utilities.Components.TrueTypeFont;
 import com.damagedearth.Utilities.MouseHelper;
 import org.lwjgl.input.Keyboard;
 
@@ -17,7 +17,7 @@ public class GuiScreen
 
     protected GuiScreen parentScreen = null;
     public String displayName;
-    FontRenderer fontRenderer;
+    TrueTypeFont fontRenderer;
 
     /**
      * @param damagedEarth An instance of Damaged Earth
@@ -66,7 +66,7 @@ public class GuiScreen
             {
                 if (button.isEnabled)
                 {
-                    if (MouseHelper.insideAreaW(button.x, button.y, button.width, button.height))
+                    if (MouseHelper.insideArea(button.x, button.y, button.width, button.height))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(0, button));
                     }
@@ -79,7 +79,7 @@ public class GuiScreen
             {
                 if (button.isEnabled)
                 {
-                    if (MouseHelper.insideAreaW(button.x, button.y, button.width, button.height))
+                    if (MouseHelper.insideArea(button.x, button.y, button.width, button.height))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(1, button));
                     }

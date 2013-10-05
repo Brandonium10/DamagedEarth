@@ -1,26 +1,29 @@
 package com.damagedearth.Utilities;
 
+import com.damagedearth.Utilities.Components.TrueTypeFont;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class Tesselator
 {
-    double x1;
-    double y1;
-    double x2;
-    double y2;
-    float r;
-    float g;
-    float b;
-    float a;
+    private double x1;
+    private double y1;
+    private double x2;
+    private double y2;
+    private float r;
+    private float g;
+    private float b;
+    private float a;
 
-    int id;
+    private int id;
 
-    public Tesselator()
-    {
-
-    }
+    private static String defaultFont = "Times New Roman";
+    private static int defaultFontSize = 25;
+    private static Font f = new Font(defaultFont, Font.PLAIN, defaultFontSize);
+    private static TrueTypeFont trueTypeFont = new TrueTypeFont(f, true);
 
     public void set(double x1, double y1, double x2, double y2)
     {
@@ -125,5 +128,67 @@ public class Tesselator
         glDeleteTextures(id);
 
         glPopMatrix();
+    }
+
+    public void drawString(String s, double x, double y)
+    {
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F);
+    }
+
+    public void drawString(String s, double x, double y, String fontName)
+    {
+        trueTypeFont.setFont(new Font(fontName, Font.PLAIN, defaultFontSize));
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F);
+        trueTypeFont.setFont(new Font("defaultFont", Font.PLAIN, defaultFontSize));
+    }
+
+    public void drawString(String s, double x, double y, int fontSize)
+    {
+        trueTypeFont.setFontSize(fontSize);
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F);
+        trueTypeFont.setFontSize(defaultFontSize);
+    }
+
+    public void drawString(String s, double x, double y, String fontName, int fontSize)
+    {
+        trueTypeFont.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F);
+        trueTypeFont.setFont(new Font("defaultFont", Font.PLAIN, defaultFontSize));
+    }
+
+    public void drawCenterString(String s, double x, double y)
+    {
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F, TrueTypeFont.ALIGN_CENTER);
+    }
+
+    public void drawCenterString(String s, double x, double y, String fontName)
+    {
+        trueTypeFont.setFont(new Font(fontName, Font.PLAIN, defaultFontSize));
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F, TrueTypeFont.ALIGN_CENTER);
+        trueTypeFont.setFont(new Font("defaultFont", Font.PLAIN, defaultFontSize));
+    }
+
+    public void drawCenterString(String s, double x, double y, int fontSize)
+    {
+        trueTypeFont.setFontSize(fontSize);
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F, TrueTypeFont.ALIGN_CENTER);
+        trueTypeFont.setFontSize(defaultFontSize);
+    }
+
+    public void drawCenterString(String s, double x, double y, String fontName, int fontSize)
+    {
+        trueTypeFont.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        trueTypeFont.drawString((float) x, (float) y, s, 1.0F, 1.0F, TrueTypeFont.ALIGN_CENTER);
+        trueTypeFont.setFont(new Font("defaultFont", Font.PLAIN, defaultFontSize));
+    }
+
+    public static TrueTypeFont getTrueTypeFont()
+    {
+        return trueTypeFont;
+    }
+
+    public static void setTrueTypeFont(TrueTypeFont trueTypeFont)
+    {
+        Tesselator.trueTypeFont = trueTypeFont;
     }
 }
