@@ -1,24 +1,41 @@
-Damaged Earth
+![logo](https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Sep/08/damaged-earth-logo-2186841290-1_avatar.png) Damaged Earth
 =
 
-Damaged Earth is a futuristic RPG 2D game that is placed in a "ruined" version of our Earth. The player can pick
-between multiple classes including scientist and soldier.
+About
+-
 
-Helping Out
-=
+This software is registered under the GNU General Public License. Damaged Earth is developed by *The Predators Development Team*.
+Damaged Earth is open to any developers that want to help, although if you want to become part of the team please apply on our [forums](http://thepredators.endofinternet.net/).
+Credit will be given to any *team member* that *participates actively* on the project. This game is written in Java.
 
-We have spots open for graphical designers, programmers, and musicians. The standard requirement for each spot is
-to be innovative and clever. Programmers must know the fundamentals of object-oriented programming.
+* If you find any issue while running the game please open a ticket.
 
-Programming
-=
+Requirements
+-
 
-1. Make sure your changes are significant.
-2. Your coding must be written in the Allman style.
-3. Static variables must be written in all upper case (ex. public static TRANSLATE_MODIFIER_X)
-4. If pull requests take longer then a day to be accepted: email andrewmacu@me.com
+* Java 1.6 or higher
+* JDK Installation
+* Platform: Windows, Mac, or Linux
 
-Contacting Lead Developers
-=
+Compilation
+-
 
-http://thepredators.endofinternet.net/
+* Damaged Earth uses lwjgl.jar, lwjgl_util.jar, and jinput.jar from [LWJGL v2.9.0](http://lwjgl.org/).
+* Damaged Earth uses PNGDecoder which can be downloaded [here](http://twl.l33tlabs.org/dist/PNGDecoder.jar).
+* Natives for Mac and Windows are included with this repository.
+* Natives for Linux can be found on the latest LWJGL Build.
+* Add the following VM Options to the project: **-Djava.library.path=natives**
+
+Links
+-
+* [Predators Development](http://thepredators.endofinternet.net/)
+* [LWJGL](http://lwjgl.org/)
+* [PNGDecoder JAR](http://twl.l33tlabs.org/dist/PNGDecoder.jar)
+* [Intellij IDEA](http://www.jetbrains.com/idea/)
+* [SourceTree](http://www.sourcetreeapp.com/)
+
+Additional Info
+-
+
+If you are a web developer, graphical designer, or musician we could use your help. Just visit our forums and apply for the appropriate job. On another note, if you wish to promote
+this game in any way (Youtube, xFire, Twitch) please coordinate with Andrew (andrewmacu@me.com).
