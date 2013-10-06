@@ -5,20 +5,13 @@
  * located at <http://thepredators.endofinternet.net/index.php>.
  ******************************************************************************/
 
-/*******************************************************************************
- * This is a free program developed and managed by The Predators Development Team. This
- * source code should have a copy of the GNU General Public License. If it does not,
- * please see <http://www.gnu.org/licenses/>. The Predators Development Team forums is
- * located at <http://thepredators.endofinternet.net/index.php>.
- ******************************************************************************/
-
 package com.damagedearth.Entities;
 
 import com.damagedearth.Entities.Components.Entity;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.Gameplay.Items.Inventory;
 import com.damagedearth.Gameplay.Quests.BasicQuest;
-import com.damagedearth.Gui.Components.GuiInventory;
+import com.damagedearth.Gui.GuiInventory;
 import com.damagedearth.Utilities.*;
 import com.damagedearth.Worlds.BasicWorld;
 import org.lwjgl.input.Keyboard;
