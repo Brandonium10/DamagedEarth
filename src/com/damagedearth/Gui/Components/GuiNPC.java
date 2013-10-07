@@ -67,7 +67,7 @@ public class GuiNPC extends GuiScreen
             }
             for (GuiButton button : this.buttonList)
             {
-                if (button.isEnabled)
+                if (button.getEnabled())
                 {
                     if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
                     {
@@ -90,7 +90,7 @@ public class GuiNPC extends GuiScreen
             }
             for (GuiButton button : this.buttonList)
             {
-                if (button.isEnabled)
+                if (button.getEnabled())
                 {
                     if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
                     {

@@ -71,9 +71,9 @@ public class GuiScreen
         {
             for (GuiButton button : this.buttonList)
             {
-                if (button.isEnabled)
+                if (button.getEnabled())
                 {
-                    if (MouseHelper.insideArea(button.x, button.y, button.width, button.height))
+                    if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(0, button));
                     }
@@ -84,9 +84,9 @@ public class GuiScreen
         {
             for (GuiButton button : this.buttonList)
             {
-                if (button.isEnabled)
+                if (button.getEnabled())
                 {
-                    if (MouseHelper.insideArea(button.x, button.y, button.width, button.height))
+                    if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
                     {
                         System.out.println("Button has been clicked: " + mouseAction(1, button));
                     }
@@ -106,7 +106,7 @@ public class GuiScreen
      */
     protected int mouseAction(int key, GuiButton buttonClicked)
     {
-        if (buttonClicked.isEnabled)
+        if (buttonClicked.getEnabled())
         {
             if (key == 0)
             {

@@ -12,6 +12,7 @@ import com.damagedearth.Entities.EnumPlayerClass;
 import com.damagedearth.Gui.Components.CreateCharacter.GuiClass;
 import com.damagedearth.Gui.Components.GuiButton;
 import com.damagedearth.Gui.Components.GuiScreen;
+import com.damagedearth.Utilities.MouseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class GuiCreateCharacter extends GuiScreen
 
         this.classes.add(new GuiClass(EnumPlayerClass.SCIENTIST, parentScreen.damagedEarth.width / 4, parentScreen.damagedEarth.height / 2, parentScreen.damagedEarth.currentWorld.thePlayer));
         this.classes.add(new GuiClass(EnumPlayerClass.SOLDIER, parentScreen.damagedEarth.width - parentScreen.damagedEarth.width / 4, parentScreen.damagedEarth.height / 2, parentScreen.damagedEarth.currentWorld.thePlayer));
-        this.buttonList.add(new GuiButton("Enter world", parentScreen.damagedEarth.width / 4, parentScreen.damagedEarth.height - parentScreen.damagedEarth.height / 4, parentScreen.damagedEarth.width - parentScreen.damagedEarth.width / 4, parentScreen.damagedEarth.height - parentScreen.damagedEarth.height / 4 - 70, new Runnable()
+        this.buttonList.add(new GuiButton("Enter world", parentScreen.damagedEarth.width / 4, parentScreen.damagedEarth.height / 4, 500, 70, new Runnable()
         {
             @Override
             public void run()
@@ -63,7 +64,27 @@ public class GuiCreateCharacter extends GuiScreen
     @Override
     protected void handleInput()
     {
-        super.handleInput();
+        if (MouseHelper.getMouseClick(0))
+        {
+            for (GuiClass guiClass : this.classes)
+            {
+                if (MouseHelper.insideArea(guiClass.getX(), guiClass.getY(), guiClass.getWidth(), guiClass.getHeight()))
+                {
+                    guiClass.onClick();
+                }
+            }
+
+            for (GuiButton button : this.buttonList)
+            {
+                if (button.getEnabled())
+                {
+                    if (MouseHelper.insideArea(button.getX(), button.getY(), button.getWidth(), button.getHeight()))
+                    {
+                        System.out.println("Button has been clicked: " + mouseAction(0, button));
+                    }
+                }
+            }
+        }
     }
 
     @Override

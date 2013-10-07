@@ -11,11 +11,11 @@ import com.damagedearth.Utilities.Tesselator;
 
 public class GuiButton
 {
-    int x = 0, y = 0, width = 0, height = 0;
-    float r = 0, g = 0, b = 0;
-    String name;
-    boolean isEnabled;
-    Runnable run;
+    private int x = 0, y = 0, width = 0, height = 0;
+    private float r = 0, g = 0, b = 0;
+    private String name;
+    private boolean isEnabled;
+    private Runnable run;
 
     /*
     This constructor is for white buttons
