@@ -212,7 +212,6 @@ public class EntityPlayer
 
     private void keyInput()
     {
-        currentPlayerImage = TextureLoader.loadImage("res/Player/Soldier/soldier.png");
         if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))
         {
             this.move(-speed, 0);
@@ -255,8 +254,10 @@ public class EntityPlayer
                 }
             }
         }
+
         if (this.checkKey(Keyboard.KEY_E))
         {
+            //TODO: Fix inventory
             currentWorld.damagedEarth.switchScreen(new GuiInventory(currentWorld.damagedEarth, "Inventory", null));
         }
     }

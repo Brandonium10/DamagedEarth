@@ -9,6 +9,9 @@ package com.damagedearth;
 
 import com.damagedearth.Gui.Components.GuiScreen;
 import com.damagedearth.Gui.GuiMainMenu;
+import com.damagedearth.Utilities.FontRenderer;
+import com.damagedearth.Utilities.H1FontRenderer;
+import com.damagedearth.Utilities.H2FontRenderer;
 import com.damagedearth.Utilities.PlayerFileManager;
 import com.damagedearth.Worlds.BasicWorld;
 import com.damagedearth.Worlds.CrystalForest;
@@ -23,6 +26,10 @@ public class DamagedEarth
 {
     public int width;
     public int height;
+
+    public static FontRenderer fontRenderer;
+    public static H1FontRenderer h1FontRenderer;
+    public static H2FontRenderer h2FontRenderer;
 
     public GuiScreen currentScreen;
     public BasicWorld currentWorld;
@@ -42,8 +49,8 @@ public class DamagedEarth
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("~~~GAME START INITIATED~~~");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        //Loads the CrystalForest world on start up
-        this.loadWorld(new CrystalForest(100, 800, this));
+        //Loads the CrystalForest world on start up.
+        this.loadWorld(new CrystalForest(115, 900, this));
         this.loadDisplay();
 
         //This is the game update. Rendering is done here along with other tasks that need to be called repeatedly
@@ -71,16 +78,19 @@ public class DamagedEarth
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setResizable(false);
             Display.create();
-            GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-            GL11.glDisable(GL11.GL_DITHER);
-            GL11.glEnable(GL11.GL_NORMALIZE); // calculated normals when scaling
-            GL11.glHint(GL11.GL_PERSPECTIVE_CORRECTION_HINT, GL11.GL_NICEST); // High quality visuals
-            GL11.glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_NICEST); //  Really Nice Perspective Calculations
+            glEnable(GL11.GL_COLOR_MATERIAL);
+            glDisable(GL11.GL_DITHER);
+            glEnable(GL11.GL_NORMALIZE);
+            glHint(GL11.GL_PERSPECTIVE_CORRECTION_HINT, GL11.GL_NICEST);
+            glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_NICEST);
             glViewport(0, 0, (int) this.width, (int) this.height);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
             glOrtho(0, width, 0, height, 0, 25);
             glMatrixMode(GL_MODELVIEW);
+            fontRenderer = new FontRenderer();
+            h1FontRenderer = new H1FontRenderer();
+            h2FontRenderer = new H2FontRenderer();
             //This switches to the main menu on startGame up
             this.switchScreen(new GuiMainMenu(this, "DamagedEarth"));
         }

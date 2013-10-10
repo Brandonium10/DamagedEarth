@@ -7,12 +7,12 @@
 
 package com.damagedearth.Gui.Components;
 
+import com.damagedearth.DamagedEarth;
 import com.damagedearth.Gameplay.Quests.BasicQuest;
+import com.damagedearth.Utilities.FontRenderer;
+import com.damagedearth.Utilities.H2FontRenderer;
 import com.damagedearth.Utilities.Tesselator;
 import com.damagedearth.Worlds.BasicWorld;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiNPCQuestDialogue
 {
@@ -23,9 +23,6 @@ public class GuiNPCQuestDialogue
     //Disables button if quest is turned in
     protected boolean isQuestTurnedIn;
     GuiScreen parentScreen;
-    /**
-     * TODO: Add support for entering in "before accept", "in complete", and "complete" dialogue for the dialogue box.
-     */
     private String title;
     private String definition;
     private int x;
@@ -34,9 +31,6 @@ public class GuiNPCQuestDialogue
     private int height;
     private boolean isSelected;
     private boolean isEnabled;
-    private List<String> dialogueBeforeAccept = new ArrayList<String>();
-    private List<String> dialogueIncomplete = new ArrayList<String>();
-    private List<String> dialogueComplete = new ArrayList<String>();
 
     /**
      * @param title        The visible title of the selectable
@@ -54,7 +48,7 @@ public class GuiNPCQuestDialogue
         this.isQuestComplete = false;
         this.isQuestTurnedIn = false;
 
-        done = new GuiButton("Okay", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
+        done = new GuiButton("Accept", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + this.parentScreen.damagedEarth.width / 4 + 2,
                 BasicWorld.VIEW_CORDS_Y + 224,
                 245, 114, new Runnable()
         {
@@ -77,7 +71,7 @@ public class GuiNPCQuestDialogue
                 parentScreen.damagedEarth.switchScreen(null);
             }
         }, false, 0, 255, 0);
-        cancel = new GuiButton("Cancel", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
+        cancel = new GuiButton("Back", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 4,
                 BasicWorld.VIEW_CORDS_Y + 224,
                 245, 114, new Runnable()
         {
@@ -122,10 +116,12 @@ public class GuiNPCQuestDialogue
         tesselator.set(this.x, this.y - height, this.x + this.width, this.y - this.height + this.height / 4);
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
-        tesselator.setColor(1, 1, 1, 0);
+        tesselator.setColor(0.5F, 0.5F, 0.5F, 0.5F);
         tesselator.set(BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 2, BasicWorld.VIEW_CORDS_Y + parentScreen.damagedEarth.height - 92, BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width - 2, BasicWorld.VIEW_CORDS_Y + 2);
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
+
+        DamagedEarth.fontRenderer.drawString(this.quest.getSlayingQuestInstance() != null ? "Kill " + this.quest.getSlayingQuestInstance().getInitialAmount() + " " + this.quest.getSlayingQuestInstance().getEnemyToKill() + (this.quest.getSlayingQuestInstance().getInitialAmount() > 1 ? "'s" : "") : "", BasicWorld.VIEW_CORDS_X + this.parentScreen.damagedEarth.width / 2 + 6, 440);
     }
 
     private void onSelect()
@@ -166,6 +162,7 @@ public class GuiNPCQuestDialogue
         tesselator.setColor(0.5f, 0.5f, 0.5f, 0.5f);
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
+        this.renderLore();
     }
 
     /*
@@ -175,7 +172,6 @@ public class GuiNPCQuestDialogue
     {
         if (this.isEnabled())
         {
-            Tesselator tesselator = new Tesselator();
             //If the quest is turned in this selectable along w/ all its buttons will be disabled.
             if (this.isQuestTurnedIn)
             {
@@ -194,9 +190,13 @@ public class GuiNPCQuestDialogue
             this.render();
             if (this.isSelected) this.whileSelected();
             //Draw quest name on selectable
-            tesselator.drawString(this.quest.getQuestName(), x, y - 27, 25);
+            DamagedEarth.fontRenderer.drawString(this.quest.getQuestName(), x, y - 27);
 
-            if (this.quest.isComplete()) this.isQuestComplete = true;
+            if (this.quest.isComplete())
+            {
+                this.isQuestComplete = true;
+                this.done.setName("Complete");
+            }
 
             //Checks if the parent NPC has the quest in currentQuests. If it doesn't, the quest is turned in and this selectable will be disabled.
             if (!((GuiNPC) this.parentScreen).getNpc().getCurrentQuests().contains(quest)) this.isQuestTurnedIn = true;
@@ -206,6 +206,17 @@ public class GuiNPCQuestDialogue
             {
                 this.done.setEnabled(false);
             }
+        }
+    }
+
+    private void renderLore()
+    {
+        Tesselator tesselator = new Tesselator();
+        //Check to see if the player doesn't have the quest.
+        //TODO: Render the quest lore
+        if (!this.parentScreen.damagedEarth.currentWorld.thePlayer.getOwnedQuests().contains(this.quest))
+        {
+
         }
     }
 
@@ -302,35 +313,5 @@ public class GuiNPCQuestDialogue
     public void setQuestComplete(boolean questComplete)
     {
         isQuestComplete = questComplete;
-    }
-
-    public List<String> getDialogueBeforeAccept()
-    {
-        return dialogueBeforeAccept;
-    }
-
-    public void setDialogueBeforeAccept(List<String> dialogueBeforeAccept)
-    {
-        this.dialogueBeforeAccept = dialogueBeforeAccept;
-    }
-
-    public List<String> getDialogueIncomplete()
-    {
-        return dialogueIncomplete;
-    }
-
-    public void setDialogueIncomplete(List<String> dialogueIncomplete)
-    {
-        this.dialogueIncomplete = dialogueIncomplete;
-    }
-
-    public List<String> getDialogueComplete()
-    {
-        return dialogueComplete;
-    }
-
-    public void setDialogueComplete(List<String> dialogueComplete)
-    {
-        this.dialogueComplete = dialogueComplete;
     }
 }

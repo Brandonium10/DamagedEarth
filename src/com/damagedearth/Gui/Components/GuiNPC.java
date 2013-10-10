@@ -10,6 +10,8 @@ package com.damagedearth.Gui.Components;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Entities.Components.EntityNPC;
 import com.damagedearth.Gameplay.Quests.BasicQuest;
+import com.damagedearth.Utilities.FontRenderer;
+import com.damagedearth.Utilities.H2FontRenderer;
 import com.damagedearth.Utilities.MouseHelper;
 import com.damagedearth.Utilities.Tesselator;
 import com.damagedearth.Worlds.BasicWorld;
@@ -145,9 +147,8 @@ public class GuiNPC extends GuiScreen
         {
             button.update();
         }
-        Tesselator tesselator = new Tesselator();
         //Draws the NPC's name centered horizontally on the top of the screen
-        tesselator.drawCenterString(getNpc().getEntityName(), BasicWorld.VIEW_CORDS_X + damagedEarth.width / 2, BasicWorld.VIEW_CORDS_Y + damagedEarth.height - 28);
+        DamagedEarth.h2FontRenderer.drawCenterString(getNpc().getEntityName(), BasicWorld.VIEW_CORDS_X + damagedEarth.width / 2, BasicWorld.VIEW_CORDS_Y + damagedEarth.height - 38);
 
         this.handleInput();
     }

@@ -13,15 +13,17 @@ import com.damagedearth.Entities.EntityPlayer;
 
 public class SlayingQuest extends BasicQuest
 {
-    protected String enemyToKill;
-    protected int amount;
+    private String enemyToKill;
+    private int initialAmount;
+    private int amount;
 
     public SlayingQuest(EntityPlayer thePlayer, String questName, EntityNPC npcGiver, String enemyToKill, int amount)
     {
         super(thePlayer, questName, npcGiver);
-        this.questType = EnumQuestType.SLAYING;
         this.enemyToKill = enemyToKill;
         this.amount = amount;
+        //Save the initial amount for quest dialogues
+        this.initialAmount = amount;
     }
 
     /*
@@ -30,7 +32,7 @@ public class SlayingQuest extends BasicQuest
      */
     public void updateKillstreak(EntityEnemy enemyKilled)
     {
-        if (!isComplete && this.enemyToKill != null && this.amount != 0)
+        if (!this.isComplete() && this.enemyToKill != null && this.amount != 0)
         {
             if (enemyKilled.getEntityName().equals(this.enemyToKill))
             {
@@ -39,7 +41,7 @@ public class SlayingQuest extends BasicQuest
             }
             if (amount <= 0)
             {
-                this.isComplete = true;
+                this.setComplete(true);
             }
         }
     }
@@ -62,5 +64,10 @@ public class SlayingQuest extends BasicQuest
     public void setAmount(int amount)
     {
         this.amount = amount;
+    }
+
+    public int getInitialAmount()
+    {
+        return initialAmount;
     }
 }

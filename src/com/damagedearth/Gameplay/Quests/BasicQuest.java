@@ -15,13 +15,16 @@ public class BasicQuest
     /*
     TODO: Add other quest types to quest framework
      */
-    EntityPlayer thePlayer;
-    EntityNPC questGiver;
+    private EntityPlayer thePlayer;
+    private EntityNPC questGiver;
 
-    String questName;
+    private String questName;
 
-    EnumQuestType questType;
-    boolean isComplete;
+    private boolean isComplete;
+
+    private String dialogueBeforeAccept;
+    private String dialogueIncomplete;
+    private String dialogueComplete;
 
     public BasicQuest(EntityPlayer thePlayer, String questName)
     {
@@ -47,16 +50,6 @@ public class BasicQuest
         this.questName = questName;
     }
 
-    public EnumQuestType getQuestType()
-    {
-        return questType;
-    }
-
-    public void setQuestType(EnumQuestType questType)
-    {
-        this.questType = questType;
-    }
-
     public boolean isComplete()
     {
         return isComplete;
@@ -75,5 +68,35 @@ public class BasicQuest
     public SlayingQuest getSlayingQuestInstance()
     {
         return this instanceof SlayingQuest ? (SlayingQuest) this : null;
+    }
+
+    public String getDialogueBeforeAccept()
+    {
+        return dialogueBeforeAccept;
+    }
+
+    public void setDialogueBeforeAccept(String dialogueBeforeAccept)
+    {
+        this.dialogueBeforeAccept = dialogueBeforeAccept;
+    }
+
+    public String getDialogueIncomplete()
+    {
+        return dialogueIncomplete;
+    }
+
+    public void setDialogueIncomplete(String dialogueIncomplete)
+    {
+        this.dialogueIncomplete = dialogueIncomplete;
+    }
+
+    public String getDialogueComplete()
+    {
+        return dialogueComplete;
+    }
+
+    public void setDialogueComplete(String dialogueComplete)
+    {
+        this.dialogueComplete = dialogueComplete;
     }
 }

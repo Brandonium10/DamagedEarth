@@ -10,6 +10,10 @@ package com.damagedearth.Gui;
 import com.damagedearth.DamagedEarth;
 import com.damagedearth.Gui.Components.GuiButton;
 import com.damagedearth.Gui.Components.GuiScreen;
+import com.damagedearth.Utilities.H2FontRenderer;
+import com.damagedearth.Utilities.Tesselator;
+
+import java.awt.*;
 
 public class GuiMainMenu extends GuiScreen
 {
@@ -67,5 +71,7 @@ public class GuiMainMenu extends GuiScreen
     public void drawGLScreen()
     {
         super.drawGLScreen();
+
+        DamagedEarth.h2FontRenderer.drawCenterString("Damaged Earth", damagedEarth.width / 2, damagedEarth.height - 42);
     }
 }

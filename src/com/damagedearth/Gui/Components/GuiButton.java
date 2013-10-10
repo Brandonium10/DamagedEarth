@@ -7,6 +7,8 @@
 
 package com.damagedearth.Gui.Components;
 
+import com.damagedearth.DamagedEarth;
+import com.damagedearth.Utilities.FontRenderer;
 import com.damagedearth.Utilities.Tesselator;
 
 public class GuiButton
@@ -65,7 +67,8 @@ public class GuiButton
         tesselator.setColor(r, g, b);
         tesselator.startDrawingCQuad();
         tesselator.endDrawingQuad();
-        tesselator.drawCenterString(name, x + width / 2, y - height / 2 - 12);
+
+        DamagedEarth.fontRenderer.drawCenterString(name, x + width / 2, y - height / 2 - 12);
     }
 
     public void click()
